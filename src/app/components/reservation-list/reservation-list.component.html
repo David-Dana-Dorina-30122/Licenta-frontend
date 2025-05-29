@@ -1,0 +1,93 @@
+<div>
+  <div *ngIf="isNotEmpty" class="reservation-list-container">
+    <h2 class="title">Lista Rezervărilor</h2>
+
+
+      <h3> Rezervari Active </h3>
+      <table class="reservation-table">
+        <thead>
+        <tr>
+          <th>Check-In</th>
+          <th>Check-Out</th>
+          <th>Număr Cameră</th>
+          <th>Tip Cameră</th>
+<!--          <th>Descriere</th>-->
+          <th>Preț/Noapte</th>
+<!--          <th>Capacitate</th>-->
+          <th>Status</th>
+          <th *ngIf="isNotEmpty" >Anulează</th>
+        </tr>
+        </thead>
+
+        <tbody *ngFor="let reservation of activeReservations">
+        <tr >
+        <td>{{ reservation.dataCheckIn | date: 'yyyy-MM-dd' }}</td>
+          <td>{{ reservation.dataCheckOut | date: 'yyyy-MM-dd' }}</td>
+          <td>{{ getRoomDetails(reservation.room?.id)?.number || '-' }}</td>
+          <td>{{ getRoomDetails(reservation.room?.id)?.type || '-' }}</td>
+<!--          <td>{{ getRoomDetails(reservation.room?.id)?.description || '-' }}</td>-->
+          <td>{{ getRoomDetails(reservation.room?.id)?.pricePerNight || '-' }}</td>
+<!--          <td>{{ getRoomDetails(reservation.room?.id)?.capacity || '-' }}</td>-->
+          <td>{{reservation.status}} </td>
+          <td>
+            <button class="delete-btn" (click)="deleteReservation(reservation.id)">🗑️</button>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="7" style="text-align: center;"><img *ngIf="qrCodes[reservation.id]" [src]="qrCodes[reservation.id]" alt="QR Code" width="100" height="100" />
+          </td>
+        </tr>
+
+        </tbody>
+      </table>
+
+    <table class="reservation-table">
+      <thead>
+      <h3>Rezervari Inactive</h3>
+      <tr>
+        <th>Check-In</th>
+        <th>Check-Out</th>
+        <th>Număr Cameră</th>
+        <th>Tip Cameră</th>
+<!--        <th>Descriere</th>-->
+<!--        <th>Preț/Noapte</th>-->
+<!--        <th>Capacitate</th>-->
+        <th>Status</th>
+      </tr>
+      </thead>
+
+      <tbody *ngFor="let reservation of inactiveReservations">
+      <tr>
+        <td>{{ reservation.dataCheckIn | date: 'yyyy-MM-dd' }}</td>
+        <td>{{ reservation.dataCheckOut | date: 'yyyy-MM-dd' }}</td>
+        <td>{{ getRoomDetails(reservation.room?.id)?.number || '-' }}</td>
+        <td>{{ getRoomDetails(reservation.room?.id)?.type || '-' }}</td>
+<!--        <td>{{ getRoomDetails(reservation.room?.id)?.description || '-' }}</td>-->
+<!--        <td>{{ getRoomDetails(reservation.room?.id)?.pricePerNight || '-' }}</td>-->
+<!--        <td>{{ getRoomDetails(reservation.room?.id)?.capacity || '-' }}</td>-->
+        <td>{{reservation.status}} </td>
+      </tr>
+      <tr>
+        <td><app-reviews [reservationId]="reservation.id"></app-reviews></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+    <div class="content"  *ngIf="!isNotEmpty">
+      <h3>Nu ai rezervări</h3>
+      <button class="create-btn" routerLink="/availability">Fă-ți o rezervare aici!</button>
+    </div>
+
+</div>
+
+<div *ngIf="showLoginPopup" class="modal-backdrop">
+  <div class="modal-content">
+    <h2>Autentificare necesară</h2>
+    <p>Trebuie să fii logat pentru a vedea rezervarile.</p>
+    <div class="modal-buttons">
+      <button (click)="redirectToLogin()">Login</button>
+      <button (click)="closePopup()">Anulează</button>
+    </div>
+  </div>
+</div>

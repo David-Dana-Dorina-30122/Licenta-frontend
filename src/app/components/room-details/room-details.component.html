@@ -1,0 +1,90 @@
+<body>
+
+<div *ngIf="room" class="room-details">
+  <p>Camera: {{ room.type }}</p>
+  <p>Despre: {{ room.description }}</p>
+  <p>Price per night: {{ room.pricePerNight }} RON</p>
+
+  <hr style="border: none; border-top: 2px solid #ccc; width: 100%; margin: 20px auto;">
+  <div class="photos-container">
+     <div class="slider-container">
+       <button class="nav-button prev-button" (click)="prevImage()">&#10094;</button>
+
+       <img
+          [src]="room.imageUrls[currentImageIndex]"
+         alt="Room Image"
+         class="slider-image"
+        />
+
+       <button class="nav-button next-button" (click)="nextImage()">&#10095;</button>
+     </div>
+
+    <div class="thumbnails">
+    <img
+      *ngFor="let image of room.imageUrls; let i = index"
+      [src]="image"
+      [class.active]="i === currentImageIndex"
+      (click)="selectImage(i)"
+    />
+    </div>
+  </div>
+
+  <hr style="border: none; border-top: 2px solid #ccc; width: 100%; margin: 20px auto;">
+
+  <h3><u>Services & Equipments</u></h3>
+  <ul class="services-container">
+    <li>
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor"><circle cx="12" cy="12" r="10"/><path d="M9 13V8.4c0-.372 0-.558.049-.709a1 1 0 0 1 .642-.642C9.841 7 10.028 7 10.4 7H13a3 3 0 1 1 0 6zm0 0v5"/></g></svg> Parking
+    </li>
+    <li>
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path fill="currentColor" d="M7 22v-9.15q-1.275-.35-2.138-1.4T4 9V2h2v7h1V2h2v7h1V2h2v7q0 1.4-.863 2.45T9 12.85V22H7Zm10 0v-8h-3V7q0-2.075 1.463-3.538T19 2v20h-2Z"/></svg> Restaurant
+    </li>
+    <li>
+      <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 2048 2048"><path fill="currentColor" d="M1408 592q-26 0-45-19t-19-45q0-51 19-98t56-83l79-80q38-38 38-91q0-26 19-45t45-19q26 0 45 19t19 45q0 51-19 98t-56 83l-79 80q-38 38-38 91q0 26-19 45t-45 19zm-384 0q-26 0-45-19t-19-45q0-51 19-98t56-83l79-80q38-38 38-91q0-26 19-45t45-19q26 0 45 19t19 45q0 51-19 98t-56 83l-79 80q-38 38-38 91q0 26-19 45t-45 19zm832 176q40 0 75 15t61 41t41 61t15 75v384q0 40-15 75t-41 61t-61 41t-75 15h-57q-2 7-3 13t-4 12v39q0 66-25 124t-69 102t-102 69t-124 25h-384q-78 0-144-35t-110-93H334q-66 0-124-25t-102-68t-69-102t-25-125v-64h256q0-79 30-149t83-122t122-83t149-30q30 0 58 5t56 14V640h1024v128h64zM654 1152q-53 0-99 20t-82 55t-55 81t-20 100h370v-228q-26-13-54-20t-60-8zm-320 512h441q-7-29-7-64v-64H153q10 28 28 51t41 41t52 26t60 10zm463 67v1l1 2v-1l-1-2zm867-131V768H896v832q0 40 15 75t41 61t61 41t75 15h384q40 0 75-15t61-41t41-61t15-75zm256-256V960q0-26-19-45t-45-19h-64v512h64q26 0 45-19t19-45z"/></svg> Breakfast
+    </li>
+    <li>
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path fill="currentColor" d="M12 15a3 3 0 1 0 3 3a3 3 0 0 0-3-3Zm0 4a1 1 0 1 1 1-1a1 1 0 0 1-1 1Zm0-8a7.06 7.06 0 0 0-4.95 2.05a1 1 0 0 0 0 1.41a1 1 0 0 0 1.41 0a5 5 0 0 1 7.08 0a1 1 0 0 0 .7.3a1 1 0 0 0 .76-1.71A7.06 7.06 0 0 0 12 11Zm0-4a11.08 11.08 0 0 0-7.78 3.22a1 1 0 0 0 1.42 1.42a9 9 0 0 1 12.72 0a1 1 0 0 0 .71.29a1 1 0 0 0 .71-.29a1 1 0 0 0 0-1.42A11.08 11.08 0 0 0 12 7Zm10.61.39a15 15 0 0 0-21.22 0a1 1 0 0 0 1.42 1.42a13 13 0 0 1 18.38 0a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.42Z"/></svg> Free WI-FI
+    </li>
+    <li>
+      <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M22 3.6V11H2V3.6a.6.6 0 0 1 .6-.6h18.8a.6.6 0 0 1 .6.6ZM18 7h1M2 11l.79 2.584A2 2 0 0 0 4.702 15H6m16-4l-.79 2.584A2 2 0 0 1 19.298 15H18m-8.5-.5s0 7-3.5 7m8.5-7s0 7 3.5 7m-6-7v7"/></svg> Air Conditioning
+    </li>
+    <li>
+      <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M12 22q-2.35-.3-4.2-1.2t-3.138-2.35Q3.375 17 2.7 15.088t-.675-4.238q2.75.275 4.65 1t3.088 2.05q1.187 1.325 1.712 3.313T12 22Zm0-8.425q-.575-.875-1.563-1.725T8.15 10.3q.15-1.05.5-2.175t.85-2.212q.5-1.088 1.137-2.088T12 2q.725.825 1.363 1.825T14.5 5.912Q15 7 15.35 8.125t.5 2.175q-1.3.675-2.288 1.525T12 13.575Zm2 8.025q-.05-1.75-.263-3.238t-.662-2.812q1.175-2.025 3.238-3.3t5.662-1.4q.025 3.95-2.113 6.813T14 21.6Z"/></svg> Spa & wellness
+    </li>
+    <li>
+      <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 512 512"><path fill="currentColor" d="M193.69 152.84a16 16 0 0 1 29.64 2.56l36.4 121.36l30-59.92a16 16 0 0 1 28.62 0L345.89 272h96.76A213.08 213.08 0 0 0 464 176.65C463.37 114.54 413.54 64 352.92 64c-48.09 0-80 29.54-96.92 51c-16.88-21.49-48.83-51-96.92-51C98.46 64 48.63 114.54 48 176.65A211.13 211.13 0 0 0 56.93 240h93.18Z"/><path fill="currentColor" d="M321.69 295.16L304 259.78l-33.69 67.38A16 16 0 0 1 256 336q-.67 0-1.38-.06a16 16 0 0 1-14-11.34l-36.4-121.36l-30 59.92A16 16 0 0 1 160 272H69.35q14 29.29 37.27 57.66c18.77 22.88 52.8 59.46 131.39 112.81a31.84 31.84 0 0 0 36 0c78.59-53.35 112.62-89.93 131.39-112.81a316.79 316.79 0 0 0 19-25.66H336a16 16 0 0 1-14.31-8.84ZM464 272h-21.35a260.11 260.11 0 0 1-18.25 32H464a16 16 0 0 0 0-32ZM48 240a16 16 0 0 0 0 32h21.35a225.22 225.22 0 0 1-12.42-32Z"/></svg> Fitness Center
+    </li>
+    <li>
+      <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M2 21v-2q.95 0 1.425-.5T5.3 18q1.4 0 1.925.5t1.425.5q.9 0 1.425-.5T12 18q1.4 0 1.925.5t1.425.5q.9 0 1.425-.5T18.7 18q1.4 0 1.875.5T22 19v2q-1.475 0-1.937-.5T18.7 20q-.9 0-1.425.5t-1.925.5q-1.4 0-1.925-.5T12 20q-.9 0-1.425.5T8.65 21q-1.4 0-1.925-.5T5.3 20q-.9 0-1.363.5T2 21Zm0-4.5v-2q.95 0 1.425-.5t1.875-.5q1.4 0 1.938.5t1.412.5q.9 0 1.425-.5T12 13.5q1.4 0 1.925.5t1.425.5q.9 0 1.425-.5t1.925-.5q1.4 0 1.875.5t1.425.5v2q-1.475 0-1.937-.5t-1.363-.5q-.9 0-1.388.5t-1.962.5q-1.425 0-1.937-.5T12 15.5q-.95 0-1.413.5t-1.937.5q-1.475 0-1.963-.5T5.3 15.5q-.9 0-1.362.5T2 16.5ZM8.65 12q-.525 0-.925-.163T6.9 11.4l3.325-3.325l-1-1L5.2 5.5V3l5.5 2l6.4 6.4q-.425.275-.825.438T15.35 12q-.9 0-1.425-.5T12 11q-1.4 0-1.925.5T8.65 12Zm8.05-4q-1.05 0-1.775-.725T14.2 5.5q0-1.025.725-1.763T16.7 3q1.05 0 1.775.738T19.2 5.5q0 1.05-.725 1.775T16.7 8Z"/></svg> Pool
+    </li>
+  </ul>
+  <hr style="border: none; border-top: 2px solid #ccc; width: 100%; margin: 20px auto;">
+  <h3> <u>Rules & Guidelines</u> </h3>
+  <ul>
+    <li><svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 512 512"><path fill="currentColor" d="M96 304c0 8.8 7.2 16 16 16h117.5l-96-96H112c-8.8 0-16 7.2-16 16v64zM256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zm0 448c-105.9 0-192-86.1-192-192c0-41.4 13.3-79.7 35.7-111.1l267.4 267.4C335.7 434.7 297.4 448 256 448zm45.2-192H384v32h-50.8l-32-32zm111.1 111.1L365.2 320H400c8.8 0 16-7.2 16-16v-64c0-8.8-7.2-16-16-16H269.2L144.9 99.7C176.3 77.3 214.6 64 256 64c105.9 0 192 86.1 192 192c0 41.4-13.3 79.7-35.7 111.1zM320.6 128c-15.6 0-28.6-11.2-31.4-25.9c-.7-3.6-4-6.1-7.7-6.1h-16.2c-5 0-8.7 4.5-8 9.4c4.6 30.9 31.2 54.6 63.3 54.6c15.6 0 28.6 11.2 31.4 25.9c.7 3.6 4 6.1 7.7 6.1h16.2c5 0 8.7-4.5 8-9.4c-4.6-30.9-31.2-54.6-63.3-54.6z"/></svg> Smoking not allowed</li>
+    <li><svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" d="M14.5 24v-4a2.5 2.5 0 0 0-2.5-2.5h-.5V24m9-4v-1.5A2.5 2.5 0 0 0 18 16h-.5v4v-9.5H17a2.5 2.5 0 0 0-2.5 2.5v8m9 3v-4a2.5 2.5 0 0 0-2.5-2.5h-.708M.5 24v-2.5a4 4 0 0 1 4-4h4v-7h3v-.25l-.063-.1A19.008 19.008 0 0 1 8.5 0"/></svg> Quiet hours: 22:00 - 8:00</li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+
+  <button (click)="showPopup()">Parking Info</button>
+  <div *ngIf="showPopUp" class="modal-backdrop">
+  <div class="modal-content">
+    <h3>Parking Information</h3>
+    <ul class="parking-info">
+    <li>Indoor Parking</li>
+    <li>Near the property</li>
+    <li>200 parking spaces</li>
+    <li>10 &euro;/day fee</li>
+    <li>Monthly parking</li>
+    <li>Weekly parking</li>
+    </ul>
+    <div class="modal-buttons">
+      <button (click)="closePopup()">Close</button>
+    </div>
+  </div>
+  </div>
+  <hr style="border: none; border-top: 2px solid #ccc; width: 100%; margin: 20px auto;">
+</div>
+</body>

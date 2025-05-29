@@ -1,0 +1,44 @@
+<div class="auth-container">
+
+  <div class="auth-card">
+      <a class="home" [routerLink]="['/home']" title="Home">
+        <i class="fas fa-home"></i>
+      </a>
+    <h2>{{ isLogin ? 'Login' : 'Register' }}</h2>
+
+    <div *ngIf="isLogin">
+      <input type="text" [(ngModel)]="email" placeholder="Email" />
+      <input type="password" [(ngModel)]="password" placeholder="Password" />
+      <button (click)="submit()">Login</button>
+      <p class="switch-link">
+        Nu ai cont? <a href="javascript:void(0)" (click)="toggleForm()">Înregistrează-te aici!</a>
+      </p>
+      <p class="switch-link" >
+        <a href="javascript:void(0)" (click)="forgotPassword()">Am uitat parola!</a>
+      </p>
+
+    </div>
+
+    <div *ngIf="!isLogin">
+      <input type="text" [(ngModel)]="email" placeholder="Email" />
+      <input type="password" [(ngModel)]="password" placeholder="Password" />
+      <button (click)="submit()">Register</button>
+      <p class="switch-link">
+        Ai deja cont? <a href="javascript:void(0)" (click)="toggleForm()">Loghează-te aici</a>
+      </p>
+      <div *ngIf="isVerificationStep" class="verification-step">
+        <h3>Verificare Email</h3>
+        <input
+          id="code"
+          type="text"
+          [(ngModel)]="verificationCode"
+          name="code"
+          placeholder="Cod de verificare"
+          required
+        />
+        <button (click)="verifyCode()">Verifică Codul</button>
+        <button (click)="resendCode()">Retrimite Codul</button>
+      </div>
+    </div>
+  </div>
+</div>

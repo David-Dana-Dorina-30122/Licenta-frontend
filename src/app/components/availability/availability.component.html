@@ -1,0 +1,78 @@
+<h2 class="section-title">Verifică disponibilitatea camerelor</h2>
+
+<form [formGroup]="availabilityForm" (ngSubmit)="searchRooms()" class="availability-form">
+  <div class="form-group">
+    <label>Data check-in:</label>
+    <input type="date" formControlName="checkIn" [min]="today"/>
+  </div>
+
+  <div class="form-group">
+    <label>Data check-out:</label>
+    <input type="date" formControlName="checkOut" [min]="availabilityForm.get('checkIn')?.value || today"/>
+  </div>
+
+  <div class="form-group person-group" #personGroupRef>
+    <label>Număr persoane:</label>
+    <input class="show-popup" readonly [value]="getPersonLabel()" (click)="showPopup()" />
+
+    <div *ngIf="showPopUp" class="person-dropdown">
+      <div class="counter-group">
+        <label>Adulți:</label>
+        <button (click)="decrease('adults')">−</button>
+        <span>{{ numberOfAdults }}</span>
+        <button (click)="increase('adults')">+</button>
+      </div>
+
+      <div class="counter-group">
+        <label>Copii:</label>
+        <button (click)="decrease('children')">−</button>
+        <span>{{ numberOfChildren }}</span>
+        <button (click)="increase('children')">+</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Tipul Camerei:</label>
+    <select  formControlName="type" name="type">
+    <option *ngFor="let type of roomTypes" [value] = "type" >{{type}}</option>
+    </select>
+  </div>
+
+  <div *ngIf="availabilityForm.errors?.['invalidDateRange'] && submitted" style="color: red;" >
+    Data de check-in nu poate fi după data de check-out.
+  </div>
+
+  <button type="submit" [disabled]="availabilityForm.invalid || loading" class="search-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20"><path fill="currentColor" d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33l-1.42 1.42l-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/></svg>
+  </button>
+</form>
+
+<!-- Loading -->
+<div *ngIf="loading" class="loading-msg">
+  🔄 Căutăm camere disponibile...
+</div>
+
+<!-- Eroare -->
+<div *ngIf="errorMessage" class="error-msg">
+  ⚠️ {{ errorMessage }}
+</div>
+
+<!-- Lista camerelor -->
+<div *ngIf="rooms.length > 0">
+  <h3 class="section-subtitle">Camere disponibile:</h3>
+  <div class="room-container">
+    <div *ngFor="let room of rooms" class="room-card">
+      <p><strong>Camera:</strong> {{ room.number }}</p>
+      <p><strong>Descriere: </strong> {{ room.description }}</p>
+      <p><strong>Tip:</strong> {{room.type}}</p>
+      <p><strong>Capacitate: </strong> {{ room.capacity }} persoane</p>
+      <p><strong>Preț/noapte: </strong> {{ room.pricePerNight }} RON</p>
+      <button class="reserve-btn" (click)="selectRoom(room)">Rezervă</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="submitted && !loading && rooms.length === 0" class="no-rooms">
+  Nu există camere disponibile pentru perioada selectată.
+</div>

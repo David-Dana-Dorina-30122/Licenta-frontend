@@ -1,0 +1,17 @@
+<body>
+<app-availability></app-availability>
+<h2 style="text-align: center; margin-bottom: 20px;">Lista Camerelor</h2>
+
+<div class="room-container">
+  <div class="room-card" *ngFor="let room of rooms">
+    <p><strong>Camera: </strong> {{ room.number }}</p>
+    <p><strong>Tip: </strong> {{ room.type }}</p>
+    <p><strong>Descriere: </strong> {{ room.description }}</p>
+    <p><strong>Preț/Noapte: </strong> {{ room.pricePerNight }} RON</p>
+    <p><strong>Capacitate: </strong> {{ room.capacity }} persoane</p>
+    <button [routerLink]="['/room-details', room.id]">Detaliile camerei</button>
+
+    <button *ngIf="role === 'ROLE_ADMIN'" (click)="deleteRoom(room.id)">🗑️ Șterge</button>
+  </div>
+</div>
+</body>

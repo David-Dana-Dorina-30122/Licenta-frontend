@@ -1,0 +1,39 @@
+<div class="room-form">
+  <form (ngSubmit)="createRoom()">
+    <div class="form-group">
+      <label for="number">Număr:</label>
+      <input type="number" id="number" [(ngModel)]="room.number" name="number" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="type">Tip:</label>
+      <select id="type" [(ngModel)]="room.type" name="type" class="form-control">
+        <option *ngFor="let type of roomTypes" [value]="type">{{ type }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Descriere:</label>
+      <input type="text" id="description" [(ngModel)]="room.description" name="description" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="capacity">Capacitate:</label>
+      <input type="number" id="capacity" [(ngModel)]="room.capacity" name="capacity" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="status">Status:</label>
+      <select id="status" [(ngModel)]="room.status" name="status" class="form-control">
+        <option *ngFor="let status of roomStatuses" [value]="status">{{ status }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="pricePerNight">Preț/Noapte:</label>
+      <input type="number" id="pricePerNight" [(ngModel)]="room.pricePerNight" name="pricePerNight" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Confirmă</button>
+  </form>
+</div>

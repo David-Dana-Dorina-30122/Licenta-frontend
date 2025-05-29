@@ -1,0 +1,76 @@
+.homepage-container {
+  text-align: center;
+  padding: 40px 20px;
+  min-height: 88.5vh;
+}
+.welcome-card{
+  background: rgba(255, 255, 255, 0.71);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 12px 0;
+  margin: 50px 250px;
+}
+
+body {
+  background-image: url("https://i.redd.it/dr5cbbya3md01.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: Arial, sans-serif;
+}
+
+
+.welcome-title {
+  font-size: 2.5em;
+  color: #24303c;
+  margin-bottom: 10px;
+}
+
+.welcome-subtitle {
+  font-size: 1.2em;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.71);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 25px;
+  width: 280px;
+  transition: transform 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-card h3 {
+  color: #24303c;
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.feature-card button {
+  background-color: rgba(43, 58, 73, 0.6);
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.feature-card button:hover {
+  background-color: rgba(56, 80, 101, 0.93);
+}

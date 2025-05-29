@@ -1,0 +1,104 @@
+.reservation-list-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.reservation-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.reservation-table th,
+.reservation-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: center;
+}
+
+.reservation-table th {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.reservation-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 350px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.modal-buttons button {
+  margin: 10px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.modal-buttons button:last-child {
+  background-color: #ccc;
+  color: #333;
+}
+
+
+.create-btn{
+  background-color: #3556dc;
+  color: white;
+  border: none;
+  padding: 10px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  /*margin: 0 500px;*/
+}
+
+.content{
+  text-align: center;
+}
+
+

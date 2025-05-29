@@ -1,0 +1,104 @@
+body{
+  margin-top: 100px;
+}
+
+.account-wrapper {
+  display: flex;
+  max-width: 1000px;
+  margin: 20px auto;
+  gap: 20px;
+}
+
+.sidebar {
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar button {
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.sidebar button.active,
+.sidebar button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.main-content {
+  flex-grow: 1;
+}
+
+.container-panel {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.panel-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.form-button,.verifyCode,.sendCode {
+  padding: 10px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-gray {
+  color: gray;
+}
+
+.address-section {
+  margin-top: 30px;
+}
+.logout-button {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.logout-button:hover{
+  background-color: #a12531;
+}

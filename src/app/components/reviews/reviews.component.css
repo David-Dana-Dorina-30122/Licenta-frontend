@@ -1,0 +1,11 @@
+.review-section {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.review-form textarea {
+  width: 100%;
+  height: 60px;
+}

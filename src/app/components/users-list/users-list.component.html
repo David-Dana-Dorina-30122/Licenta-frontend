@@ -1,0 +1,23 @@
+<body>
+<h2 style="text-align: center; margin-bottom: 20px;">Lista Userilor</h2>
+<div class="room-container">
+  <div class="room-card" *ngFor="let user of users">
+    <p><strong>Email: </strong> {{ user.email }}</p>
+
+    <p>
+      <strong>Rol: </strong>
+      <select [(ngModel)]="user.role">
+        <option value="ROLE_USER">User</option>
+        <option value="ROLE_ADMIN">Admin</option>
+      </select>
+    </p>
+
+    <p>
+      <strong>Enabled: </strong>
+      {{user.enabled}}
+    </p>
+
+    <button (click)="updateUserRole(user)">Actualizează Rol</button>
+  </div>
+</div>
+</body>

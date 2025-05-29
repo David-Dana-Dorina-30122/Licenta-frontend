@@ -1,0 +1,43 @@
+<!-- Rezervare Card -->
+<div class="reservation-container">
+  <h2>Confirmă Rezervarea</h2>
+  <p><strong>Check-in:</strong> {{ reservation.dataCheckIn }}</p>
+  <p><strong>Check-out:</strong> {{ reservation.dataCheckOut }}</p>
+  <p><strong>Număr persoane:</strong> {{ reservation.numberOfPeople }}</p>
+
+  <form (ngSubmit)="createReservation()">
+
+
+    <p><strong>Pret Total:</strong> {{ reservation.totalCost }} RON</p>
+
+    <button class="confirm-btn" type="submit">Confirmă rezervarea</button>
+  </form>
+</div>
+<div class="services-panel">
+
+<div class="meals">
+  <img src="https://www.mashed.com/img/gallery/the-truth-about-hotel-breakfast-buffets/l-intro-1609346085.jpg" alt="breakfast">
+  <h4>
+    <input type="checkbox" [(ngModel)]="reservation.meals" name="meals" (ngModelChange)="onExtrasChanged()" />
+    Mic dejun inclus [50 RON/Persoană]
+  </h4>
+</div>
+<div class="spa">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz7rHE7QnNpxxEiBZTWK907cZCXhWQJJTo4g&s" alt="spa">
+  <h4>
+    <input type="checkbox" [(ngModel)]="reservation.spa" name="spa" (ngModelChange)="onExtrasChanged()" />
+    Acces la servicii de spa și welness [100 RON/Cameră]
+  </h4>
+</div>
+</div>
+
+<div *ngIf="showLoginPopup" class="modal-backdrop">
+  <div class="modal-content">
+    <h2>Autentificare necesară</h2>
+    <p>Trebuie să fii logat pentru a face o rezervare.</p>
+    <div class="modal-buttons">
+      <button (click)="redirectToLogin()">Login</button>
+      <button (click)="closePopup()">Anulează</button>
+    </div>
+  </div>
+</div>

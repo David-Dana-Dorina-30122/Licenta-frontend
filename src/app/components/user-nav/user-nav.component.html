@@ -1,0 +1,27 @@
+<!--<body>-->
+<!--<nav>-->
+<!--  <ul>-->
+<!--    <li routerLink="/home">Home</li>-->
+<!--    <li *ngIf="role === 'ROLE_ADMIN'"  routerLink="/createRoom" > Create Room  </li>-->
+<!--    <li routerLink="/rooms"> Rooms </li>-->
+<!--    <li *ngIf="role === 'ROLE_ADMIN'"  routerLink="/users" > Useri </li>-->
+<!--    <li *ngIf="service.isLoggedIn()" routerLink="/myAccount">-->
+<!--      My Account-->
+<!--    </li>-->
+<!--    <li *ngIf="!service.isLoggedIn()" routerLink="/login">Log In</li>-->
+<!--&lt;!&ndash;    <li routerLink="/createReservation">Create Reservation</li>&ndash;&gt;-->
+<!--  </ul>-->
+<!--</nav>-->
+<!--</body>-->
+<body>
+<nav class="navbar">
+  <ul class="nav-list">
+    <li routerLink="/home">Home</li>
+    <li *ngIf="role === 'ROLE_ADMIN'" routerLink="/createRoom">Create Room</li>
+    <li routerLink="/rooms">Rooms</li>
+    <li *ngIf="role === 'ROLE_ADMIN'" routerLink="/users">Users</li>
+    <li *ngIf="service.isLoggedIn()" routerLink="/myAccount">My Account</li>
+    <li *ngIf="!service.isLoggedIn()" routerLink="/login">Log In</li>
+  </ul>
+</nav>
+</body>

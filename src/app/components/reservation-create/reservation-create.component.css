@@ -6,6 +6,7 @@
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   font-family: Arial, sans-serif;
+  box-sizing: border-box;
 }
 
 .confirm-btn {
@@ -16,6 +17,9 @@
   border-radius: 8px;
   margin-top: 15px;
   cursor: pointer;
+  width: 100%;
+  max-width: 200px;
+  transition: background-color 0.3s;
 }
 
 .confirm-btn:hover {
@@ -32,6 +36,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 10px; /* prevent content touching edges on small screens */
+  box-sizing: border-box;
 }
 
 .modal-content {
@@ -39,18 +45,22 @@
   padding: 30px;
   border-radius: 12px;
   max-width: 350px;
+  width: 100%;
   box-shadow: 0 8px 24px rgba(0,0,0,0.2);
   text-align: center;
+  box-sizing: border-box;
 }
 
 .modal-buttons button {
-  margin: 10px;
+  margin: 10px 5px;
   padding: 8px 14px;
   border-radius: 6px;
   border: none;
   background-color: #007bff;
   color: white;
   cursor: pointer;
+  min-width: 100px;
+  transition: background-color 0.3s;
 }
 
 .modal-buttons button:last-child {
@@ -58,20 +68,64 @@
   color: #333;
 }
 
-img{
-  width: 400px;
-  height: auto;
+.modal-buttons button:hover {
+  background-color: #0056b3;
 }
 
-.meals,.spa{
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  margin: 20px;
-  border: #3b4a59 solid 2px;
+img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
   border-radius: 10px;
 }
 
-.services-panel{
+.meals, .spa {
   display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin: 20px 0;
+  border: #3b4a59 solid 2px;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.services-panel {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .services-panel {
+    flex-direction: column;
+    margin: 0 10px;
+  }
+
+  .meals, .spa {
+    margin: 10px 0;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reservation-container {
+    margin: 20px 10px;
+    padding: 15px;
+  }
+
+  .confirm-btn {
+    max-width: 100%;
+  }
+
+  .modal-content {
+    padding: 20px;
+  }
+
+  .modal-buttons button {
+    min-width: 80px;
+    padding: 8px 10px;
+  }
 }

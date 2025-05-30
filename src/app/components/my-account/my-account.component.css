@@ -1,4 +1,4 @@
-body{
+body {
   margin-top: 100px;
 }
 
@@ -53,9 +53,10 @@ body{
   border-radius: 6px;
   font-size: 14px;
   width: 100%;
+  box-sizing: border-box;
 }
 
-.form-button,.verifyCode,.sendCode {
+.form-button, .verifyCode, .sendCode {
   padding: 10px;
   background-color: #007bff;
   border: none;
@@ -64,6 +65,8 @@ body{
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .form-button:hover {
@@ -87,6 +90,7 @@ body{
 .address-section {
   margin-top: 30px;
 }
+
 .logout-button {
   background-color: #dc3545;
   color: white;
@@ -99,6 +103,52 @@ body{
   margin-top: 20px;
 }
 
-.logout-button:hover{
+.logout-button:hover {
   background-color: #a12531;
+}
+
+/* ==== Responsive ==== */
+
+@media (max-width: 768px) {
+  .account-wrapper {
+    flex-direction: column;
+    margin: 10px;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .sidebar button {
+    flex: 1 1 120px;
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .main-content {
+    width: 100%;
+  }
+
+  .container-panel {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    margin-top: 60px;
+  }
+
+  .sidebar button {
+    font-size: 13px;
+    padding: 7px;
+  }
+
+  .panel-title {
+    font-size: 1.2rem;
+  }
 }

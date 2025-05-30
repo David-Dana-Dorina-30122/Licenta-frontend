@@ -1,11 +1,11 @@
 .room-form {
   max-width: 500px;
-  margin: 0 auto;
+  margin: 70px auto 0 auto;
   padding: 20px 30px;
   background-color: rgba(197, 193, 193, 0.5);
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-top: 70px;
+  box-sizing: border-box;
 }
 
 .form-group {
@@ -26,6 +26,7 @@ select {
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
+  box-sizing: border-box;
 }
 
 button {
@@ -37,8 +38,23 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
   background-color: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .room-form {
+    padding: 15px 20px;
+    margin-top: 40px;
+    width: 90%;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 10px;
+  }
 }

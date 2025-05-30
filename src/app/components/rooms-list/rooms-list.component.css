@@ -1,5 +1,6 @@
-body{
- margin-top: 100px;
+body {
+  margin-top: 100px;
+  font-family: Arial, sans-serif;
 }
 
 .room-container {
@@ -8,6 +9,7 @@ body{
   gap: 20px;
   justify-content: center;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .room-card {
@@ -18,7 +20,8 @@ body{
   padding: 15px 20px;
   width: 300px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
 .room-card:hover {
@@ -36,12 +39,24 @@ body{
   font-weight: bold;
 }
 
-button{
-  margin: 10px;
+button {
+  margin: 10px 0;
   padding: 8px 14px;
   border-radius: 6px;
   border: none;
   background-color: rgba(51, 51, 51, 0.8);
   color: white;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #333;
+}
+
+/* Responsive pentru ecrane mici */
+@media (max-width: 650px) {
+  .room-card {
+    width: 100%;
+  }
 }

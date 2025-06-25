@@ -8,10 +8,11 @@ import {ReservationCreateComponent} from './components/reservation-create/reserv
 import {AvailabilityComponent} from './components/availability/availability.component';
 import {RoomsListComponent} from './components/rooms-list/rooms-list.component';
 import {RoomCreateComponent} from './components/room-create/room-create.component';
-import {UsersListComponent} from './components/users-list/users-list.component';
+import {MaintenanceComponent} from './components/maintenance-tab/maintenance.component';
 import {ResetPasswordComponent} from './components/reset-password/reset-password.component';
 import {RoomDetailsComponent} from './components/room-details/room-details.component';
 import {ReviewsComponent} from './components/reviews/reviews.component';
+import {RestaurantComponent} from "./components/restaurant/restaurant.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -23,10 +24,11 @@ export const routes: Routes = [
   { path: 'availability', component: AvailabilityComponent },
   { path: 'rooms', component: RoomsListComponent},
   { path: 'createRoom', component: RoomCreateComponent},
-  { path: 'users', component: UsersListComponent},
+  { path: 'maintenance', component: MaintenanceComponent},
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'room-details/:id',component: RoomDetailsComponent},
-  { path: 'reviews', component: ReviewsComponent}
+  { path: 'reviews', component: ReviewsComponent},
+  { path: 'restaurant', component: RestaurantComponent}
 ];
 
 @NgModule({

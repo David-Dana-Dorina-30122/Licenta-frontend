@@ -1,3 +1,7 @@
+body{
+  margin-top: 5%;
+}
+
 .reservation-list-container {
   max-width: 1000px;
   margin: 40px auto;
@@ -7,7 +11,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   font-family: 'Segoe UI', sans-serif;
   box-sizing: border-box;
-  overflow-x: auto; /* permite scroll orizontal pe ecrane mici */
+  overflow-x: auto;
 }
 
 .title {
@@ -19,7 +23,7 @@
 .reservation-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 600px; /* ca să păstreze o dimensiune minimă pe desktop */
+  min-width: 600px;
 }
 
 .reservation-table th,
@@ -27,7 +31,7 @@
   padding: 12px 16px;
   border-bottom: 1px solid #e0e0e0;
   text-align: center;
-  white-space: nowrap; /* să nu se spargă textul în mai multe linii */
+  white-space: nowrap;
 }
 
 .reservation-table th {
@@ -64,7 +68,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px; /* padding pe mobil */
+  padding: 10px;
   box-sizing: border-box;
 }
 
@@ -84,7 +88,7 @@
   padding: 8px 14px;
   border-radius: 6px;
   border: none;
-  background-color: #007bff;
+  background-color: #333;
   color: white;
   cursor: pointer;
   min-width: 100px;
@@ -97,7 +101,7 @@
 }
 
 .create-btn {
-  background-color: #3556dc;
+  background-color: #333;
   color: white;
   border: none;
   padding: 10px 10px;
@@ -108,14 +112,13 @@
 }
 
 .create-btn:hover {
-  background-color: #2a44a1;
+  background-color: #2e2d2d;
 }
 
 .content {
   text-align: center;
 }
 
-/* Responsive */
 
 @media (max-width: 768px) {
   .reservation-list-container {

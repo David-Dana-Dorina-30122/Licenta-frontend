@@ -11,10 +11,10 @@
       <input type="password" [(ngModel)]="password" placeholder="Password" />
       <button (click)="submit()">Login</button>
       <p class="switch-link">
-        Nu ai cont? <a href="javascript:void(0)" (click)="toggleForm()">Înregistrează-te aici!</a>
+        No Account? <a href="javascript:void(0)" (click)="toggleForm()">Register Here!</a>
       </p>
       <p class="switch-link" >
-        <a href="javascript:void(0)" (click)="forgotPassword()">Am uitat parola!</a>
+        <a href="javascript:void(0)" (click)="forgotPassword()">Forgot My Password!</a>
       </p>
 
     </div>
@@ -22,22 +22,25 @@
     <div *ngIf="!isLogin">
       <input type="text" [(ngModel)]="email" placeholder="Email" />
       <input type="password" [(ngModel)]="password" placeholder="Password" />
+        <input type="text" [(ngModel)]="firstName" placeholder="First Name" />
+        <input type="text" [(ngModel)]="lastName" placeholder="Last Name" />
+        <input type="text" [(ngModel)]="phone" placeholder="Phone Number" />
       <button (click)="submit()">Register</button>
       <p class="switch-link">
-        Ai deja cont? <a href="javascript:void(0)" (click)="toggleForm()">Loghează-te aici</a>
+        Already have an account? <a href="javascript:void(0)" (click)="toggleForm()">Log In here!</a>
       </p>
       <div *ngIf="isVerificationStep" class="verification-step">
-        <h3>Verificare Email</h3>
+        <h3>Verify Email</h3>
         <input
           id="code"
           type="text"
           [(ngModel)]="verificationCode"
           name="code"
-          placeholder="Cod de verificare"
+          placeholder="Verfication Code"
           required
         />
-        <button (click)="verifyCode()">Verifică Codul</button>
-        <button (click)="resendCode()">Retrimite Codul</button>
+        <button (click)="verifyCode()">Verify Code!</button>
+        <button (click)="resendCode()">Resend Code!</button>
       </div>
     </div>
   </div>

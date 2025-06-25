@@ -72,6 +72,15 @@ export class ReservationListComponent {
     }
   }
 
+  getAllReservations():void{
+    this.service.getAllReservations().subscribe( (reservations: ReservationModel[]) => {
+          console.log('Rezervările utilizatorului:', reservations);
+        },
+        (error) => {
+          console.error('Eroare la obținerea rezervărilor:', error);
+        })
+  }
+
   loadRooms(): void {
     this.service.getRooms().subscribe(
       (rooms: RoomModel[]) => {

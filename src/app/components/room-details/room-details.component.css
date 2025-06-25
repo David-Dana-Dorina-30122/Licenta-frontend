@@ -63,7 +63,6 @@ body {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Am comentat pozițiile fixe pentru butoane pentru că pe mobil ar putea crea probleme */
 .prev-button {
   /* left: 450px; */
 }
@@ -131,7 +130,6 @@ button:hover {
   background-color: #333;
 }
 
-/* Layout pentru info parcare */
 .parking-info {
   display: flex;
   flex-direction: column;
@@ -139,7 +137,6 @@ button:hover {
   align-items: center;
 }
 
-/* Responsive pentru mobil */
 @media (max-width: 600px) {
   .slider-container {
     flex-direction: column;

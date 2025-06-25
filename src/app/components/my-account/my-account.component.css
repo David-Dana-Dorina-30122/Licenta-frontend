@@ -4,8 +4,8 @@ body {
 
 .account-wrapper {
   display: flex;
-  max-width: 1000px;
-  margin: 20px auto;
+  max-width: 100%;
+  margin: 20px 20px 0 5%;
   gap: 20px;
 }
 
@@ -14,6 +14,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  justify-items: left;
+
 }
 
 .sidebar button {
@@ -27,7 +29,7 @@ body {
 
 .sidebar button.active,
 .sidebar button:hover {
-  background-color: #007bff;
+  background-color: #404345;
   color: white;
 }
 
@@ -37,9 +39,11 @@ body {
 
 .container-panel {
   background: white;
+  width: 70%;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  justify-self: center;
 }
 
 .panel-title {
@@ -49,7 +53,7 @@ body {
 
 .form-input {
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #afafaf;
   border-radius: 6px;
   font-size: 14px;
   width: 100%;
@@ -58,7 +62,7 @@ body {
 
 .form-button, .verifyCode, .sendCode {
   padding: 10px;
-  background-color: #007bff;
+  background-color: #515353;
   border: none;
   color: white;
   font-weight: bold;
@@ -89,6 +93,7 @@ body {
 
 .address-section {
   margin-top: 30px;
+  text-align: center;
 }
 
 .logout-button {
@@ -107,7 +112,6 @@ body {
   background-color: #a12531;
 }
 
-/* ==== Responsive ==== */
 
 @media (max-width: 768px) {
   .account-wrapper {

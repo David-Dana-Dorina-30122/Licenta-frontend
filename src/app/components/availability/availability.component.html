@@ -1,30 +1,31 @@
-<h2 class="section-title">Verifică disponibilitatea camerelor</h2>
+<body>
+<h2 class="section-title">Check room availability</h2>
 
 <form [formGroup]="availabilityForm" (ngSubmit)="searchRooms()" class="availability-form">
   <div class="form-group">
-    <label>Data check-in:</label>
+    <label>Check-in date:</label>
     <input type="date" formControlName="checkIn" [min]="today"/>
   </div>
 
   <div class="form-group">
-    <label>Data check-out:</label>
+    <label>Check-out date:</label>
     <input type="date" formControlName="checkOut" [min]="availabilityForm.get('checkIn')?.value || today"/>
   </div>
 
   <div class="form-group person-group" #personGroupRef>
-    <label>Număr persoane:</label>
+    <label>Guests:</label>
     <input class="show-popup" readonly [value]="getPersonLabel()" (click)="showPopup()" />
 
     <div *ngIf="showPopUp" class="person-dropdown">
       <div class="counter-group">
-        <label>Adulți:</label>
+        <label>Adults:</label>
         <button (click)="decrease('adults')">−</button>
         <span>{{ numberOfAdults }}</span>
         <button (click)="increase('adults')">+</button>
       </div>
 
       <div class="counter-group">
-        <label>Copii:</label>
+        <label>Children:</label>
         <button (click)="decrease('children')">−</button>
         <span>{{ numberOfChildren }}</span>
         <button (click)="increase('children')">+</button>
@@ -32,15 +33,15 @@
     </div>
   </div>
 
-  <div class="form-group">
-    <label>Tipul Camerei:</label>
-    <select  formControlName="type" name="type">
-    <option *ngFor="let type of roomTypes" [value] = "type" >{{type}}</option>
-    </select>
-  </div>
+<!--  <div class="form-group">-->
+<!--    <label>Room Type:</label>-->
+<!--    <select  formControlName="type" name="type">-->
+<!--    <option *ngFor="let type of roomTypes" [value] = "type" >{{type}}</option>-->
+<!--    </select>-->
+<!--  </div>-->
 
   <div *ngIf="availabilityForm.errors?.['invalidDateRange'] && submitted" style="color: red;" >
-    Data de check-in nu poate fi după data de check-out.
+    Check-out date cannot be before check-in date.
   </div>
 
   <button type="submit" [disabled]="availabilityForm.invalid || loading" class="search-btn">
@@ -50,29 +51,39 @@
 
 <!-- Loading -->
 <div *ngIf="loading" class="loading-msg">
-  🔄 Căutăm camere disponibile...
+  🔄 Searching for available rooms...
 </div>
 
-<!-- Eroare -->
+
 <div *ngIf="errorMessage" class="error-msg">
   ⚠️ {{ errorMessage }}
 </div>
 
-<!-- Lista camerelor -->
 <div *ngIf="rooms.length > 0">
-  <h3 class="section-subtitle">Camere disponibile:</h3>
-  <div class="room-container">
-    <div *ngFor="let room of rooms" class="room-card">
-      <p><strong>Camera:</strong> {{ room.number }}</p>
-      <p><strong>Descriere: </strong> {{ room.description }}</p>
-      <p><strong>Tip:</strong> {{room.type}}</p>
-      <p><strong>Capacitate: </strong> {{ room.capacity }} persoane</p>
-      <p><strong>Preț/noapte: </strong> {{ room.pricePerNight }} RON</p>
-      <button class="reserve-btn" (click)="selectRoom(room)">Rezervă</button>
+  <div class="card">
+    <h2 style="text-align: center;">Available Rooms</h2>
+    <div class="room-container" *ngFor="let room of rooms">
+      <img
+        [src]="room.imageUrls[0]"
+        alt="Room Image"
+        class="slider-image"
+      />
+      <div class="room-card" >
+        <p><strong>Room: </strong> {{ room.number }}</p>
+        <p><strong>Type: </strong> {{ room.type }}</p>
+        <p><strong>Description: </strong> {{ room.description }}</p>
+        <p><strong>Price:</strong> {{ getConvertedPrice(room.pricePerNight) | currency:getCurrency()}}</p>
+        <p><strong>Max Capacity: </strong> {{ room.capacity }} </p>
+        <div class="buttons">
+          <button [routerLink]="['/room-details', room.id]">Room Details!</button>
+          <button (click)="selectRoom(room)">Make this reservation</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <div *ngIf="submitted && !loading && rooms.length === 0" class="no-rooms">
-  Nu există camere disponibile pentru perioada selectată.
+  No available rooms for the selected period!
 </div>
+</body>

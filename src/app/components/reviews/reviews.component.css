@@ -1,11 +1,81 @@
+body{
+  margin-top: 10%;
+}
+
 .review-section {
   border: 1px solid #ccc;
-  padding: 1rem;
-  border-radius: 8px;
+  padding: 1.5rem;
+  border-radius: 10px;
   margin-top: 1rem;
+  background-color: #f9f9f9;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.review-section h4,
+.review-section h5 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.review-list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.review-list li {
+  margin-bottom: 0.5rem;
+  background: #fff;
+  padding: 0.75rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.review-form label {
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+.review-form select,
+.review-form textarea {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
 }
 
 .review-form textarea {
-  width: 100%;
-  height: 60px;
+  height: 80px;
+  resize: vertical;
+}
+
+.review-form button {
+  align-self: flex-start;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.review-form button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.review-form button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
 }

@@ -1,0 +1,44 @@
+<!--<h2 class="title">Restaurant Menu</h2>-->
+
+
+
+<!--<div class="menu-container">-->
+<!--    <div class="menu-card" *ngFor="let item of items">-->
+<!--        <img [src]="item.photoURL" alt="{{ item.foodName }}">-->
+<!--        <div class="info">-->
+<!--            <h3>{{ item.foodName }}</h3>-->
+<!--            <p>{{ item.description }}</p>-->
+<!--            <button (click)="deleteItem(item.id!)">Șterge</button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<body>
+<div class="menu-container">
+  <div class="form-container"  *ngIf="role === 'ROLE_ADMIN'">
+    <input [(ngModel)]="newItem.foodName" placeholder="Name" name="foodName">
+    <input [(ngModel)]="newItem.photoURL" placeholder="URL image" name="photoURL">
+    <input [(ngModel)]="newItem.description" placeholder="Description" name="description">
+    <input [(ngModel)]="newItem.price" placeholder="Price" name="price">
+    <button class="add-btn" (click)="addItem()">Add</button>
+  </div>
+
+  <div class="menu-header">
+    <h1>Our Restaurant</h1>
+  </div>
+
+  <div class="menu-section" *ngFor="let item of items">
+    <div class="menu-item">
+      <div class="menu-item-info">
+        <h3>{{item.foodName}}</h3>
+        <p>{{item.description}}</p>
+        <div class="menu-item-price">${{ item.price }}</div>
+      </div>
+      <img [src]="item.photoURL" alt="{{ item.foodName }}">
+      <button  *ngIf="role === 'ROLE_ADMIN'" class="delete-btn" (click)="deleteItem(item.id!)">Delete</button>
+    </div>
+
+  </div>
+</div>
+</body>

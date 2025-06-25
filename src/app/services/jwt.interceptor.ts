@@ -12,35 +12,24 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private router: Router) {}
+  constructor() {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('authToken');
-
-    // ✅ NU adăugăm tokenul pentru aceste rute:
-    const isAuthUrl = request.url.includes('/auth/login') ||
-      request.url.includes('/auth/register') ||
-      request.url.includes('/auth/verify') ||
-      request.url.includes('/auth/resend');
-
-    if (token && !isAuthUrl) {
+    if (token) {
       request = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${token}`
-        }
+        setHeaders: {Authorization: `Bearer ${token}`}
       });
     }
-
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
           console.warn('Token expirat sau invalid. Redirectare la login...');
-         // localStorage.removeItem('authToken');
-         // window.location.href = '/home';
+         localStorage.removeItem('authToken');
+         window.location.href = '/home';
         }
         return throwError(() => error);
       })
     );
   }
-
 }

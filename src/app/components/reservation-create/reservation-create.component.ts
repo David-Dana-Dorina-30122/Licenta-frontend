@@ -6,6 +6,7 @@ import {jwtDecode} from 'jwt-decode';
 import {Services} from '../../services/services';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ReservationStatus} from '../../models/reservationStatus.model';
+import {CurrencyService} from '../../services/currency.service';
 
 @Component({
   selector: 'app-reservation-create',
@@ -21,7 +22,8 @@ export class ReservationCreateComponent {
   constructor(
     private route: ActivatedRoute,
     private service: Services,
-    private router: Router
+    private router: Router,
+    private currencyService: CurrencyService
   ) {}
 
   calculatedTotalCost: number = 0;
@@ -112,6 +114,14 @@ export class ReservationCreateComponent {
 
   closePopup() {
     this.showLoginPopup = false;
+  }
+
+  getConvertedPrice(price: number): number {
+    return this.currencyService.convertFromRON(price);
+  }
+
+  getCurrency(): string {
+    return this.currencyService.getCurrency();
   }
 }
 

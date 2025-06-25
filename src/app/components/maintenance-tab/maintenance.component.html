@@ -1,0 +1,58 @@
+<body>
+<h2 class="section-title">Users list</h2>
+
+<div class="user-container">
+    <div class="user-card" *ngFor="let user of users">
+        <tr><strong>Email:</strong> {{ user.email }}</tr>
+
+        <tr>
+            <strong>Role:</strong>
+            <select [(ngModel)]="user.role" class="role-select">
+                <option value="ROLE_USER">User</option>
+                <option value="ROLE_STAFF">Staff</option>
+                <option value="ROLE_ADMIN">Admin</option>
+            </select>
+        </tr>
+
+        <tr><strong>Active:</strong> {{ user.enabled }}</tr>
+
+        <button class="update-btn" (click)="updateUserRole(user)">Update Role</button>
+    </div>
+</div>
+
+<h2 class="section-title">Reservations list</h2>
+
+<div class="reservations-container">
+    <div class="table-wrapper">
+        <table class="styled-table">
+            <thead>
+            <tr>
+                <th>Check-In</th>
+                <th>Check-Out</th>
+                <th>Check-In At</th>
+                <th>Check-Out At</th>
+                <th>Status</th>
+                <th>Room</th>
+                <th>User</th>
+                <th>Update</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let r of reservations">
+                <td>{{ r.dataCheckIn | date:'shortDate' }}</td>
+                <td>{{ r.dataCheckOut | date:'shortDate' }}</td>
+                <td>{{ r.checkedInAt | date:'short' }}</td>
+                <td>{{ r.checkedOutAt | date:'short' }}</td>
+                <td>{{ r.status }}</td>
+                <td>{{ r.room?.number }}</td>
+                <td>{{ r.user?.email }}</td>
+              <td>
+                <button class="update-btn" style="margin-right: 10px" (click)="updateReservationCI(r)">Check-In</button>
+                <button class="update-btn" (click)="updateReservationCO(r)">Check-Out</button>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>

@@ -1,3 +1,7 @@
+body{
+  margin: 6% 0;
+}
+
 .section-title,
 .section-subtitle {
   text-align: center;
@@ -10,7 +14,7 @@
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
-  padding: 20px;
+  padding: 4%;
   background: rgba(85, 85, 85, 0.42);
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.05);
@@ -72,27 +76,37 @@ select {
 .error-msg {
   color: red;
 }
-
 .room-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 10%;
   justify-content: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 3% 6%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.room-container:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
 
 .room-card {
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-left: 6px solid #28a745;
-  border-radius: 10px;
-  padding: 15px 20px;
-  width: 300px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  /*background-color: #ffffff;*/
+  /*border: 1px solid #ddd;*/
+  /*border-left: 6px solid #5c5a5a;*/
+  /*border-radius: 10px;*/
+  /*padding: 15px 20px;*/
+  /*width: 300px;*/
+  /*box-shadow: 0 4px 8px rgba(0,0,0,0.1);*/
 }
 
 .reserve-btn {
   margin-top: 10px;
-  background-color: #28a745;
+  background-color: #5c5a5a;
   color: white;
   padding: 8px 14px;
   border: none;
@@ -102,7 +116,7 @@ select {
 }
 
 .reserve-btn:hover {
-  background-color: #218838;
+  background-color: #333;
 }
 
 .no-rooms {
@@ -168,14 +182,53 @@ select {
   border: 1px solid #ccc;
   background: #f2f2f2;
   cursor: pointer;
+  color: black;
+  text-align: center;
 }
 
 .counter-group span {
   min-width: 24px;
   text-align: center;
+  color: black;
 }
 
-/* ==== Responsive adjustments ==== */
+img{
+  width: 40%;
+  height: auto;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+button {
+  /*margin: 10px 10px;*/
+  /*padding: 8px 14px;*/
+  border-radius: 6px;
+  border: none;
+  background-color: rgba(51, 51, 51, 0.8);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #333;
+}
+
+h2{
+  border-bottom: #2c3e50 2px solid;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin: 1% 40%;
+}
+
+
+.card{
+  padding: 1%;
+  margin: 2% 15%;
+  border: 1px solid rgba(0, 0, 0, 0.65);
+  border-radius: 5px;
+  box-shadow: 4px 4px 10px 2px rgba(0,0,0,0.2);
+}
+
 @media (max-width: 1024px) {
   .availability-form {
     margin: 0 60px;

@@ -8,6 +8,7 @@ import {AddressModel} from '../models/address.model';
 import {UserModel} from '../models/user.model';
 import {RoleUpdateRequest} from '../models/roleUpdate';
 import {ReviewModel} from '../models/reviewModel';
+import {RestaurantItemModel} from "../models/restaurant.model";
 
 @Injectable({
   providedIn: 'root',
@@ -37,8 +38,8 @@ export class Services {
     return null;
   }
 
-  register(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/signup`, { email, password });
+  register(email: string, password: string, firstName: string, lastName: string, phone: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/auth/signup`, { email, password, firstName, lastName, phone });
   }
 
   login(email: string, password: string): Observable<any> {
@@ -80,61 +81,19 @@ export class Services {
     return this.http.post(`${this.apiUrl}/auth/reset-password`, data, { responseType: 'text' as 'json' });
   }
 
-
-
   logout() {
     localStorage.removeItem('authToken');
   }
 
-  getRooms(): Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}/rooms`);
-  }
 
-  getRoomById(id : number):Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}/rooms/${id}`);
-  }
-
-  getUserReservations(): Observable<ReservationModel[]> {
-    const token = this.getToken()
-    if (token) {
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-      return this.http.get<ReservationModel[]>(`${this.apiUrl2}/my`, {headers});
-    }
-    else throw new Error('Token-ul nu este disponibil!');
-  }
-
+// RESERVATIONS
   createReservation(reservationDTO: ReservationModel): Observable<any> {
     const token = this.getToken()
     if (token) {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post<ReservationModel>(`${this.apiUrl2}/create`, reservationDTO, {headers});
-    }
-    else throw new Error('Token-ul nu este disponibil!');
-  }
-
-  createRoom(room: RoomModel): Observable<any>{
-
-    const token = this.getToken()
-    if (token) {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-      return this.http.post<RoomModel>(`${this.apiUrl}/rooms/create`,room, {headers});
+      return this.http.post<ReservationModel>(`${this.apiUrl2}/create`, reservationDTO, {headers});
     }
     else throw new Error('Token-ul nu este disponibil!');
-  }
-
-  deleteRoom(id: number):Observable<any>{
-    const token = this.getToken()
-    if (token) {
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-      return this.http.delete(`${this.apiUrl}/rooms/${id}`)
-    }
-    else throw new Error('Token-ul nu este disponibil!');
-  }
-
-
-  getAvailableRooms(payload: any): Observable<any[]> {
-    const url = `${this.apiUrl}/rooms/available`;
-    return this.http.post<any[]>(url, payload);
   }
 
   deleteReservation(id: number): Observable<any> {
@@ -147,6 +106,64 @@ export class Services {
     else throw new Error('Token-ul nu este disponibil!');
   }
 
+  getUserReservations(): Observable<ReservationModel[]> {
+    const token = this.getToken()
+    if (token) {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      return this.http.get<ReservationModel[]>(`${this.apiUrl2}/my`, {headers});
+    }
+    else throw new Error('Token-ul nu este disponibil!');
+  }
+
+  getAllReservations(): Observable<ReservationModel[]>{
+    const token = this.getToken()
+    if (token) {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      return this.http.get<ReservationModel[]>(`${this.apiUrl2}/findAll`, {headers});
+    }
+    else throw new Error('Token-ul nu este disponibil!');
+  }
+
+  updateReservation(id:number, reservation:ReservationModel):Observable<any>{
+    const token = this.getToken()
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put(`${this.apiUrl}/reservations/${id}`,reservation,{headers})
+  }
+
+  // ROOM
+  createRoom(room: RoomModel): Observable<any>{
+    const token = this.getToken()
+    if (token) {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      return this.http.post<RoomModel>(`${this.apiUrl}/rooms/create`,room, {headers});
+    }
+    else throw new Error('Token-ul nu este disponibil!');
+  }
+
+  addImages(id:number,images: string[]):Observable<any>{
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post(`${this.apiUrl}/rooms/${id}/add-images`,images,{headers})
+  }
+
+  deleteRoom(id: number):Observable<any>{
+    const token = this.getToken()
+    if (token) {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      return this.http.delete(`${this.apiUrl}/rooms/${id}`)
+    }
+    else throw new Error('Token-ul nu este disponibil!');
+  }
+
+  getRooms(): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/rooms`);
+  }
+
+  getRoomById(id : number):Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/rooms/${id}`);
+  }
+
+// USER
   getCurrentUser(): Observable<any>{
     const token = this.getToken()
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -185,12 +202,14 @@ export class Services {
     return this.http.post(`${this.apiUrl}/addresses/add`, address, { headers });
   }
 
-
   updateUserAddress(address: AddressModel): Observable<any> {
     const token = this.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.put(`${this.apiUrl}/addresses/update`, address, { headers });
   }
+
+
+  //
 
   decodeToken(token: string): any {
     return jwtDecode(token);
@@ -216,12 +235,6 @@ export class Services {
     return this.data
   }
 
-  deleteUnverifiedUsers(){
-    const token = this.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post(`${this.apiUrl}/users/remove-unverified`,{headers})
-  }
-
   getReservationQRCode(id: number): Observable<string> {
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.getToken());
     return this.http.get(`${this.apiUrl}/reservations/${id}/qr`, {
@@ -244,4 +257,21 @@ export class Services {
     return this.http.post<ReviewModel>(`http://localhost:8082/reviews`, review, {headers});
   }
 
+  getMyRooms(): Observable<RoomModel[]> {
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<RoomModel[]>('http://localhost:8082/reviews/my-rooms',{headers});
+  }
+
+  getAllItems(): Observable<RestaurantItemModel[]> {
+    return this.http.get<RestaurantItemModel[]>(`${this.apiUrl}/restaurants/`);
+  }
+
+  addItem(item: RestaurantItemModel): Observable<RestaurantItemModel> {
+    return this.http.post<RestaurantItemModel>(`${this.apiUrl}/restaurants/addFood`, item);
+  }
+
+  deleteItem(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/restaurants/${id}`);
+  }
 }

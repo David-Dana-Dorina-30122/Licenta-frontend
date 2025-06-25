@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import {Services} from '../../services/services';
 import {RoomModel} from '../../models/room.model';
 import {Router} from '@angular/router';
+import {CurrencyPipe} from '@angular/common';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CurrencyService} from '../../services/currency.service';
 
 @Component({
   selector: 'app-rooms-list',
@@ -12,22 +15,33 @@ import {Router} from '@angular/router';
 export class RoomsListComponent {
   rooms: RoomModel[] = [];
   role: string | null = '';
+  isSearched: boolean = false;
+  selectedCurrency = 'EUR';
+  currencies = ['EUR', 'USD', 'GBP', 'RON'];
+  exchangeRates: { [currency: string]: number } = {
+    EUR: 1,
+    USD: 1.08,
+    GBP: 0.85,
+    RON: 4.97
+  };
 
-  constructor(private service: Services,private router: Router) {}
 
-  ngOnInit(){
+  constructor(private service: Services,private router: Router, private currencyService: CurrencyService) {}
+
+  ngOnInit():void{
     this.loadRooms()
     this.getRole()
-  //  this.checkToken()
   }
 
-  checkToken(){
-    if(!this.service.getToken()){
-      this.service.logout();
-      this.router.navigate(['/login']);
 
-    }
+  getConvertedPrice(price: number): number {
+    return this.currencyService.convertFromRON(price);
   }
+
+  getCurrency(): string {
+    return this.currencyService.getCurrency();
+  }
+
 
   loadRooms(){
       this.service.getRooms().subscribe(

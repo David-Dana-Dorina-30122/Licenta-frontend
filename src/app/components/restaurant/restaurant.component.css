@@ -1,0 +1,97 @@
+
+.form-container {
+    /*margin-top: 9%;*/
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.form-container input {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.delete-btn, .add-btn {
+    margin: 2% 2%;
+    background-color: #b48b4e;
+    color: white;
+    border: none;
+    padding: 3px 3px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.add-btn{
+  padding: 10px;
+}
+
+.delete-btn:hover{
+  background-color: #83673c;
+}
+body {
+  font-family: 'Georgia', serif;
+  background-color: #f8f1e4;
+  margin-top: 0;
+  padding: 2rem;
+  color: #333;
+}
+
+.menu-container {
+  max-width: 800px;
+  margin: 5% auto;
+  background-color: #fff;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.menu-header {
+  text-align: center;
+  border-bottom: 2px solid #b48b4e;
+  margin-bottom: 2rem;
+}
+
+.menu-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.menu-section {
+  margin-bottom: 2rem;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed #ccc;
+  padding: 1rem 0;
+}
+
+.menu-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-left: 1rem;
+}
+
+.menu-item-info {
+  flex-grow: 1;
+}
+
+.menu-item h3 {
+  margin: 0;
+}
+
+.menu-item p {
+  margin: 0.3rem 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.menu-item-price {
+  font-weight: bold;
+  color: #b48b4e;
+}

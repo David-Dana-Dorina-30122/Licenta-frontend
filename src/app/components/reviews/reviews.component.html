@@ -1,24 +1,25 @@
+<body>
 <div class="review-section">
-  <h4>Recenzii</h4>
-
-  <div *ngIf="reviews.length === 0">Nicio recenzie încă.</div>
-  <ul>
-    <li *ngFor="let review of reviews">
-      <strong>★{{ review.rating }}</strong> - {{ review.comment }}
-    </li>
-  </ul>
-
   <div class="review-form">
-    <h5>Lasă o recenzie</h5>
-    <label>
-      Rating:
-      <select [(ngModel)]="newReview.rating">
-        <option *ngFor="let r of [1,2,3,4,5]" [value]="r">{{ r }}</option>
-      </select>
-    </label>
-    <br>
-    <textarea [(ngModel)]="newReview.comment" placeholder="Scrie comentariul aici"></textarea>
-    <br>
-    <button (click)="submitReview()">Trimite</button>
+    <h3>Leave a review</h3>
+
+    <label for="roomSelect">Reservation:</label>
+    <select id="roomSelect" [(ngModel)]="selectedReservationId">
+      <option [ngValue]="null" disabled selected>Select a reservation</option>
+      <option *ngFor="let res of reservations" [value]="res.id">
+        Reservation: {{ res.dataCheckIn }} – {{ res.dataCheckOut }}
+      </option>
+    </select>
+
+    <label for="ratingSelect">Rating:</label>
+    <select id="ratingSelect" [(ngModel)]="newReview.rating">
+      <option *ngFor="let r of [1,2,3,4,5]" [value]="r">{{ r }}</option>
+    </select>
+
+    <label for="commentArea">Your thoughts about the stay:</label>
+    <textarea id="commentArea" [(ngModel)]="newReview.comment" placeholder="Write about your stay"></textarea>
+
+    <button (click)="submitReview()" [disabled]="!selectedReservationId || !newReview.comment.trim()">Send</button>
   </div>
 </div>
+</body>

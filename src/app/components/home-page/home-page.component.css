@@ -1,7 +1,13 @@
+html, body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
 .homepage-container {
   text-align: center;
   padding: 40px 20px;
-  min-height: 88.5vh;
+  min-height: 100vh;
 }
 
 .welcome-card {
@@ -12,7 +18,6 @@
   margin: 50px auto;
   max-width: 900px;
 }
-
 body {
   background-image: url("https://i.redd.it/dr5cbbya3md01.jpg");
   background-size: cover;
@@ -35,7 +40,7 @@ body {
   margin-bottom: 40px;
 }
 
-/* Features grid */
+
 .features {
   display: flex;
   flex-wrap: wrap;
@@ -43,7 +48,7 @@ body {
   gap: 30px;
 }
 
-/* Feature card */
+
 .feature-card {
   background: rgba(255, 255, 255, 0.71);
   border-radius: 12px;
@@ -80,7 +85,17 @@ body {
   background-color: rgba(56, 80, 101, 0.93);
 }
 
-/* ✅ Responsive adjustments */
+.review{
+  position: fixed;
+  bottom: 3%;
+  left: 2%;
+  padding: 10px;
+  border: #3b4a59 2px solid;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.71);
+  cursor: pointer;
+}
+
 @media (max-width: 992px) {
   .welcome-card {
     margin: 30px 40px;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Services} from '../../services/services';
+import {CurrencyService} from '../../services/currency.service';
 
 @Component({
   selector: 'app-user-nav',
@@ -9,14 +10,30 @@ import {Services} from '../../services/services';
 })
 export class UserNavComponent  {
   role: string | null = '';
+  isClicked = false;
+
+  currencies = ['RON', 'EUR', 'USD', 'GBP'];
+  currentCurrency = 'RON';
 
 
-  constructor(public service: Services) {}
+  constructor(private currencyService: CurrencyService, public service: Services) {}
+
+  changeCurrency(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const currency = selectElement.value;
+    this.currencyService.setCurrency(currency);
+  }
+
 
 
   ngOnInit(): void {
-
    this.role = this.service.getRole();
+    this.currentCurrency = this.currencyService.getCurrency();
   }
 
+  onClick(){
+    this.isClicked = !this.isClicked;
+  }
+
+  protected readonly HTMLSelectElement = HTMLSelectElement;
 }

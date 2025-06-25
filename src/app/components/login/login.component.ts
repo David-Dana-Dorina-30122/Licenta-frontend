@@ -12,6 +12,9 @@ import {response} from 'express';
 export class LoginComponent {
   email: string = '';
   password: string = '';
+  firstName: string = '';
+  lastName: string = '';
+  phone: string = '';
   isLogin: boolean = true;
   errorMessage: string = '';
   verificationCode: string = '';
@@ -59,7 +62,7 @@ export class LoginComponent {
 
   private register() {
     localStorage.removeItem('authToken');
-    this.authService.register(this.email, this.password).subscribe(
+    this.authService.register(this.email, this.password, this.firstName, this.lastName, this.phone).subscribe(
       (response) => {
         console.log('User registered', response);
         this.isVerificationStep = true;

@@ -1,21 +1,21 @@
+<body>
 <div>
   <div *ngIf="isNotEmpty" class="reservation-list-container">
-    <h2 class="title">Lista Rezervărilor</h2>
+    <h2 class="title">Reservations List</h2>
 
-
-      <h3> Rezervari Active </h3>
+      <h3> Active reservations </h3>
       <table class="reservation-table">
         <thead>
         <tr>
-          <th>Check-In</th>
-          <th>Check-Out</th>
-          <th>Număr Cameră</th>
-          <th>Tip Cameră</th>
+          <th>Check-In Date</th>
+          <th>Check-Out Date</th>
+          <th>Room Number</th>
+          <th>Room Type</th>
 <!--          <th>Descriere</th>-->
-          <th>Preț/Noapte</th>
+          <th>Price per Night</th>
 <!--          <th>Capacitate</th>-->
           <th>Status</th>
-          <th *ngIf="isNotEmpty" >Anulează</th>
+          <th *ngIf="isNotEmpty" >Cancel</th>
         </tr>
         </thead>
 
@@ -43,12 +43,12 @@
 
     <table class="reservation-table">
       <thead>
-      <h3>Rezervari Inactive</h3>
+      <h3>Reservation History</h3>
       <tr>
-        <th>Check-In</th>
-        <th>Check-Out</th>
-        <th>Număr Cameră</th>
-        <th>Tip Cameră</th>
+        <th>Check-In Date</th>
+        <th>Check-Out Date</th>
+        <th>Room Number</th>
+        <th>Room Type</th>
 <!--        <th>Descriere</th>-->
 <!--        <th>Preț/Noapte</th>-->
 <!--        <th>Capacitate</th>-->
@@ -68,26 +68,27 @@
         <td>{{reservation.status}} </td>
       </tr>
       <tr>
-        <td><app-reviews [reservationId]="reservation.id"></app-reviews></td>
+<!--        <td><app-reviews [reservationId]="reservation.id"></app-reviews></td>-->
       </tr>
       </tbody>
     </table>
   </div>
 
     <div class="content"  *ngIf="!isNotEmpty">
-      <h3>Nu ai rezervări</h3>
-      <button class="create-btn" routerLink="/availability">Fă-ți o rezervare aici!</button>
+      <h3>You don't have any reservations</h3>
+      <button class="create-btn" routerLink="/availability">Make a reservation here!</button>
     </div>
 
 </div>
 
 <div *ngIf="showLoginPopup" class="modal-backdrop">
   <div class="modal-content">
-    <h2>Autentificare necesară</h2>
-    <p>Trebuie să fii logat pentru a vedea rezervarile.</p>
+    <h2>Authentication needed</h2>
+    <p>You have to be logged in for this!</p>
     <div class="modal-buttons">
       <button (click)="redirectToLogin()">Login</button>
-      <button (click)="closePopup()">Anulează</button>
+      <button (click)="closePopup()">Cancel</button>
     </div>
   </div>
 </div>
+</body>

@@ -1,7 +1,7 @@
 export interface ReviewModel {
-  id?: number;
+  // id?: number;
   reservationId: number;
   rating: number; // 1 - 5
   comment: string;
-  createdAt?: Date;
+  // createdAt?: Date;
 }

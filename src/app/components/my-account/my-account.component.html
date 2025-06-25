@@ -1,28 +1,28 @@
 <body>
 <div class="account-wrapper">
   <div class="sidebar">
-    <button (click)="selectedTab = 'details'" [class.active]="selectedTab === 'details'">Detalii</button>
-    <button (click)="selectedTab = 'reservations'" [class.active]="selectedTab === 'reservations'">Rezervări</button>
+    <button (click)="selectedTab = 'details'" [class.active]="selectedTab === 'details'">Details</button>
+    <button (click)="selectedTab = 'reservations'" [class.active]="selectedTab === 'reservations'">Reservations</button>
     <button (click)="logout()" class="logout-button">Log out</button>
   </div>
 
 
   <div class="main-content">
     <div *ngIf="selectedTab === 'details'" class="container-panel">
-      <h3 class="panel-title">Detalii Utilizator</h3>
+      <h3 class="panel-title">User Details</h3>
       <div *ngFor="let user of users">
         <form [formGroup]="userForm" (ngSubmit)="updateUser()" class="flex-column">
-          <input formControlName="firstName" placeholder="Prenume" class="form-input" />
-          <input formControlName="lastName" placeholder="Nume" class="form-input" />
+          <input formControlName="firstName" placeholder="First Name" class="form-input" />
+          <input formControlName="lastName" placeholder="Last Name" class="form-input" />
           <input type="email" formControlName="email" placeholder="Email" class="form-input" />
-          <input formControlName="phone" placeholder="Telefon" class="form-input" />
-          <input type="password" formControlName="password" placeholder="Parolă (opțional)" class="form-input" />
-          <button type="submit" class="form-button">Actualizează</button>
+          <input formControlName="phone" placeholder="Phone" class="form-input" />
+          <input type="password" formControlName="password" placeholder="Password" class="form-input" />
+          <button type="submit" class="form-button">Update</button>
 <!--          <input formControlName="enabled" placeholder="Status" class="form-input"/>-->
           <div *ngIf="!enabled">
             <input class="form-input" type="text" formControlName="verificationCode" placeholder="Cod de verificare"/>
-            <button class="sendCode" (click)="resendCode()">Retrimite codul</button>
-            <button class="verifyCode" (click)="verifyCode()">Valideaza codul</button>
+            <button class="sendCode" (click)="resendCode()">Resend Code</button>
+            <button class="verifyCode" (click)="verifyCode()">Verify Code</button>
           </div>
         </form>
 
@@ -30,25 +30,25 @@
 
 
       <div class="address-section">
-        <h4>Adresa</h4>
+        <h3>Address</h3>
         <div *ngIf="hasAddress" class="flex-column">
-          <input type="text" [(ngModel)]="address.street" placeholder="Stradă" class="form-input" />
-          <input type="text" [(ngModel)]="address.city" placeholder="Oraș" class="form-input" />
-          <input type="text" [(ngModel)]="address.country" placeholder="Țară" class="form-input" />
-          <button (click)="updateAddress()" class="form-button">Actualizează Adresa</button>
+          <input type="text" [(ngModel)]="address.street" placeholder="Street" class="form-input" />
+          <input type="text" [(ngModel)]="address.city" placeholder="City" class="form-input" />
+          <input type="text" [(ngModel)]="address.country" placeholder="Country" class="form-input" />
+          <button (click)="updateAddress()" class="form-button">Update Address</button>
         </div>
         <div *ngIf="!hasAddress" class="flex-column text-center">
-          <p class="text-gray">Nu ai adăugat încă o adresă.</p>
-          <input type="text" [(ngModel)]="newAddress.street" placeholder="Stradă" class="form-input" />
-          <input type="text" [(ngModel)]="newAddress.city" placeholder="Oraș" class="form-input" />
-          <input type="text" [(ngModel)]="newAddress.country" placeholder="Țară" class="form-input" />
-          <button (click)="addNewAddress()" class="form-button">Adaugă Adresă</button>
+          <p class="text-gray">You don't have an added address yet. Add one.</p>
+          <input type="text" [(ngModel)]="newAddress.street" placeholder="Street" class="form-input" />
+          <input type="text" [(ngModel)]="newAddress.city" placeholder="City" class="form-input" />
+          <input type="text" [(ngModel)]="newAddress.country" placeholder="Country" class="form-input" />
+          <button (click)="addNewAddress()" class="form-button">Add Address</button>
         </div>
       </div>
     </div>
 
     <div *ngIf="selectedTab === 'reservations'" class="container-panel">
-      <h3 class="panel-title">Rezervările Tale</h3>
+      <h3 class="panel-title">Your Reservations</h3>
       <app-reservation-list></app-reservation-list>
     </div>
   </div>

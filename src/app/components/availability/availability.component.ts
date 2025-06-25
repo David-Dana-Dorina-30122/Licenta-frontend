@@ -4,6 +4,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Room, RoomModel} from '../../models/room.model';
 import {dateNotBeforeTodayValidator, dateRangeValidator} from '../../services/date-range.validator';
+import {CurrencyService} from '../../services/currency.service';
 
 
 @Component({
@@ -25,33 +26,38 @@ export class AvailabilityComponent {
   numberOfAdults = 1;
   numberOfChildren = 0;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private currencyService: CurrencyService) {
     this.availabilityForm = this.fb.group({
       checkIn: ['', Validators.required],
       checkOut: ['', Validators.required],
       numberOfAdults: [1, [Validators.required, Validators.min(1)]],
       numberOfChildren: [0, [Validators.required, Validators.min(0)]],
-      type:['',Validators.required]
+      // type:['',Validators.required]
      // date: ['', [dateNotBeforeTodayValidator]],
     },{ validators: dateRangeValidator()});
   }
 
   @ViewChild('personGroupRef') personGroupRef!: ElementRef;
 
-
   ngOnInit(){
     const now = new Date();
     this.today = now.toISOString().split('T')[0];
   }
 
+  getConvertedPrice(price: number): number {
+    return this.currencyService.convertFromRON(price);
+  }
 
+  getCurrency(): string {
+    return this.currencyService.getCurrency();
+  }
 
   searchRooms(): void {
     if (this.availabilityForm.invalid) {
       return;
     }
 
-    const {checkIn, checkOut, numberOfAdults,numberOfChildren,type} = this.availabilityForm.value;
+    const {checkIn, checkOut, numberOfAdults,numberOfChildren} = this.availabilityForm.value;
     const numberOfPeople = numberOfAdults + numberOfChildren;
     const params = new HttpParams()
       .set('checkIn', checkIn)
@@ -59,7 +65,7 @@ export class AvailabilityComponent {
       .set('numberOfAdults', numberOfAdults)
       .set('numberOfChildren', numberOfChildren)
       .set('numberOfPeople', numberOfPeople)
-      .set('type',type);
+      // .set('type',type);
     console.log("parametrii: ", params)
     this.loading = true;
     this.errorMessage = '';
@@ -75,7 +81,6 @@ export class AvailabilityComponent {
         this.loading = false;
       },
       error: (err) => {
-        this.errorMessage = 'A apărut o eroare la căutarea camerelor.';
         console.error(err);
         this.loading = false;
       }
@@ -84,7 +89,7 @@ export class AvailabilityComponent {
   }
 
   selectRoom(room: RoomModel): void {
-    const {checkIn, checkOut, numberOfAdults,numberOfChildren,type} = this.availabilityForm.value;
+    const {checkIn, checkOut, numberOfAdults,numberOfChildren} = this.availabilityForm.value;
     const numberOfPeople = numberOfAdults + numberOfChildren;
     this.router.navigate(['/createReservation'], {
       queryParams: {
@@ -94,7 +99,7 @@ export class AvailabilityComponent {
         numberOfAdults:numberOfAdults,
         numberOfChildren:numberOfChildren,
         numberOfPeople:numberOfPeople,
-        type: type,
+        // type: type,
         pricePerNight: room.pricePerNight
       }
     });
@@ -130,7 +135,7 @@ export class AvailabilityComponent {
 
 
   getPersonLabel(): string {
-    return `${this.numberOfAdults} Adulți, ${this.numberOfChildren} Copii`;
+    return `${this.numberOfAdults} Adults, ${this.numberOfChildren} Children`;
   }
 
   @HostListener('document:click', ['$event'])

@@ -1,3 +1,11 @@
+body{
+  margin: 0;
+  padding: 0;
+}
+* {
+  box-sizing: border-box;
+}
+
 nav {
   position: fixed;
   top: 0;
@@ -6,14 +14,16 @@ nav {
   z-index: 1000;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.7);
-  pointer-events: none;
   border-bottom: 2px solid rgba(128, 128, 128, 0.37);
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-nav * {
-  pointer-events: auto;
+.menu-button {
+  cursor: pointer;
 }
 
 .nav-list {
@@ -22,11 +32,106 @@ nav * {
   font-size: 20px;
   margin: 0;
   padding: 0;
-  /* justify-content: flex-end; */
+  gap: 20px;
 }
 
 .nav-list li {
-  margin: 0 15px;
   color: #454141;
   cursor: pointer;
+  padding: 8px;
+}
+
+.left-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.right-group{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+}
+
+.nav-list li:hover{
+  background-color: rgba(220, 217, 217, 0.68);
+  border-radius: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.nav-list li {
+  color: #454141;
+  cursor: pointer;
+  animation: slideInLeft 0.4s ease forwards;
+  opacity: 0;
+}
+
+.nav-list li:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.nav-list li:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.nav-list li:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.nav-list li:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.nav-list li:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.nav-list li:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+.currency select,.login{
+  background-color: rgba(255, 255, 255, 0.0);
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+}
+.currency select:hover{
+  background: rgba(220, 217, 217, 0.68);
+  border-radius: 5px;
+}
+.login:hover{
+  background: rgba(220, 217, 217, 0.68);
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+    gap: 10px;
+  }
+
+  .login {
+    width: 100%;
+    margin-top: 10px;
+    justify-content: flex-end;
+  }
 }

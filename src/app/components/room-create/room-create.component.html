@@ -1,24 +1,24 @@
 <div class="room-form">
   <form (ngSubmit)="createRoom()">
     <div class="form-group">
-      <label for="number">Număr:</label>
+      <label for="number">Number:</label>
       <input type="number" id="number" [(ngModel)]="room.number" name="number" class="form-control" />
     </div>
 
     <div class="form-group">
-      <label for="type">Tip:</label>
+      <label for="type">Type:</label>
       <select id="type" [(ngModel)]="room.type" name="type" class="form-control">
         <option *ngFor="let type of roomTypes" [value]="type">{{ type }}</option>
       </select>
     </div>
 
     <div class="form-group">
-      <label for="description">Descriere:</label>
+      <label for="description">Description:</label>
       <input type="text" id="description" [(ngModel)]="room.description" name="description" class="form-control" />
     </div>
 
     <div class="form-group">
-      <label for="capacity">Capacitate:</label>
+      <label for="capacity">Capacity:</label>
       <input type="number" id="capacity" [(ngModel)]="room.capacity" name="capacity" class="form-control" />
     </div>
 
@@ -30,10 +30,17 @@
     </div>
 
     <div class="form-group">
-      <label for="pricePerNight">Preț/Noapte:</label>
+      <label for="pricePerNight">Price per Night:</label>
       <input type="number" id="pricePerNight" [(ngModel)]="room.pricePerNight" name="pricePerNight" class="form-control" />
     </div>
 
-    <button type="submit" class="btn btn-primary">Confirmă</button>
+      <div class="form-group">
+          <label for="imageUrl">Photo URL:</label>
+          <input type="text" id="imageUrl" [(ngModel)]="newImageUrl" name="newImageUrl" class="form-control" />
+          <button class="btn btn-sm btn-primary mt-2" (click)="addImageUrl()">Add Room</button>
+      </div>
+<!--      <ul>-->
+<!--          <li *ngFor="let url of room.imageUrls">{{ url }}</li>-->
+<!--      </ul>-->
   </form>
 </div>

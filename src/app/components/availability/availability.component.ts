@@ -75,7 +75,7 @@ export class AvailabilityComponent {
       return;
     }
 
-    this.http.get<RoomModel[]>('http://localhost:8082/rooms/available', {params}).subscribe({
+    this.http.get<RoomModel[]>('http://localhost:8080/rooms/available', {params}).subscribe({
       next: (data) => {
         this.rooms = data;
         this.loading = false;

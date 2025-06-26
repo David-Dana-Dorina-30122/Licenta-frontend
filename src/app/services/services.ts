@@ -14,8 +14,8 @@ import {RestaurantItemModel} from "../models/restaurant.model";
   providedIn: 'root',
 })
 export class Services {
-  private apiUrl = 'http://localhost:8082';
-  private apiUrl2 = 'http://localhost:8082/reservations';
+  private apiUrl = 'http://localhost:8080';
+  private apiUrl2 = 'http://localhost:8080/reservations';
 
   constructor(private http: HttpClient) {}
 

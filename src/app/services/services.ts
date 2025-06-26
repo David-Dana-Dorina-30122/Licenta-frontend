@@ -14,7 +14,7 @@ import {RestaurantItemModel} from "../models/restaurant.model";
   providedIn: 'root',
 })
 export class Services {
-  private apiUrl = 'http://https://licenta-backend-production-d411.up.railway.app';
+  private apiUrl = 'https://licenta-backend-production-d411.up.railway.app';
   private apiUrl2 = 'https://licenta-backend-production-d411.up.railway.app/reservations';
 
   constructor(private http: HttpClient) {}

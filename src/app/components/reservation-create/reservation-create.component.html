@@ -13,6 +13,70 @@
       <button class="confirm-btn" type="submit">Confirm</button>
     </form>
   </div>
+  <div>
+    <div class="payment-form-container">
+      <h2>Payment Details</h2>
+      <form #paymentForm="ngForm">
+
+        <div class="form-group">
+          <label for="name">Cardholder Name</label>
+          <input
+            type="text"
+            id="name"
+            required
+            [(ngModel)]="paymentData.cardholder"
+            name="cardholder"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="cardNumber">Card Number</label>
+          <input
+            type="text"
+            id="cardNumber"
+            maxlength="19"
+            required
+            [(ngModel)]="paymentData.cardNumber"
+            name="cardNumber"
+            class="form-control"
+            placeholder="1234 5678 9012 3456"
+          />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="expiry">Expiry Date</label>
+            <input
+              type="text"
+              id="expiry"
+              maxlength="5"
+              required
+              [(ngModel)]="paymentData.expiry"
+              name="expiry"
+              class="form-control"
+              placeholder="MM/YY"
+            />
+          </div>
+
+          <div class="form-group half">
+            <label for="cvv">CVV</label>
+            <input
+              type="password"
+              id="cvv"
+              maxlength="4"
+              required
+              [(ngModel)]="paymentData.cvv"
+              name="cvv"
+              class="form-control"
+              placeholder="***"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
 
   <!-- RIGHT: services -->
   <div class="services-panel">

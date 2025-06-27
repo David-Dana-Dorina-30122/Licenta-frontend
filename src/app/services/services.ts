@@ -17,6 +17,9 @@ export class Services {
   private apiUrl = 'https://licenta-backend-production-d411.up.railway.app';
   private apiUrl2 = 'https://licenta-backend-production-d411.up.railway.app/reservations';
 
+  // private apiUrl = 'http://localhost:8082';
+  // private apiUrl2 = 'http://localhost:8082/reservations';
+
   constructor(private http: HttpClient) {}
 
   list: ReservationModel[] = [];
@@ -129,6 +132,18 @@ export class Services {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.put(`${this.apiUrl}/reservations/${id}`,reservation,{headers})
   }
+  pay(reservationId: number, method: string): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<any>(
+      `${this.apiUrl}/payments/pay/${reservationId}?method=${method}`,
+      {},
+      { headers }
+    );
+  }
+
+
+
 
   // ROOM
   createRoom(room: RoomModel): Observable<any>{
@@ -151,6 +166,14 @@ export class Services {
     if (token) {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
       return this.http.delete(`${this.apiUrl}/rooms/${id}`)
+    }
+    else throw new Error('Token-ul nu este disponibil!');
+  }
+  getAvailability():Observable<any>{
+    const token = this.getToken()
+    if (token) {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      return this.http.delete(`${this.apiUrl}/rooms/available`)
     }
     else throw new Error('Token-ul nu este disponibil!');
   }

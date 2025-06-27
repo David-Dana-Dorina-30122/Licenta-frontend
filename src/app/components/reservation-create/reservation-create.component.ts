@@ -43,6 +43,32 @@ export class ReservationCreateComponent {
     this.reservation.totalCost = this.calculatedTotalCost;
   }
 
+  paymentData = {
+    cardholder: '',
+    cardNumber: '',
+    expiry: '',
+    cvv: ''
+  };
+
+  confirmPayment(): void {
+    if (this.paymentData.cardNumber && this.paymentData.cardholder) {
+      const method = 'FAKE';
+      this.service.pay(this.reservation.id, method).subscribe({
+        next: (res) => {
+          console.log('Plată efectuată:', res);
+          alert('Plata a fost procesată cu succes!');
+        },
+        error: (err) => {
+          console.error('Eroare plată:', err);
+          alert('Eroare la procesarea plății.');
+        }
+      });
+    } else {
+      alert("Completează toate câmpurile!");
+    }
+  }
+
+
 
 
   ngOnInit(): void {
@@ -95,6 +121,8 @@ export class ReservationCreateComponent {
     this.service.createReservation(formattedReservation).subscribe({
       next: (res) => {
         console.log('Rezervare creată cu succes:', res);
+        this.reservation.id = res.id;
+        this.confirmPayment();
         this.router.navigate(['/reservations']);
       },
       error: (err) => {

@@ -1,61 +1,78 @@
 
-.form-container {
-    /*margin-top: 9%;*/
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 30px;
-}
-
-.form-container input {
-    padding: 8px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
-
-.delete-btn, .add-btn {
-    margin: 2% 2%;
-    background-color: #b48b4e;
-    color: white;
-    border: none;
-    padding: 3px 3px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.add-btn{
-  padding: 10px;
-}
-
-.delete-btn:hover{
-  background-color: #83673c;
-}
 body {
   font-family: 'Georgia', serif;
   background-color: #f8f1e4;
-  margin-top: 0;
-  padding: 2rem;
+  margin: 0;
+  /*padding: 24px;*/
   color: #333;
+  min-height: 100vh;
 }
+
+.top-bar{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  padding-top: 60px;
+}
+
+.form-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.form-container input {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  flex: 1 1 200px;
+  min-width: 150px;
+  box-sizing: border-box;
+}
+
+.delete-btn, .add-btn {
+  margin: 2% 2%;
+  background-color: #b48b4e;
+  color: white;
+  border: none;
+  padding: 3px 3px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-btn {
+  padding: 10px;
+  flex-shrink: 0;
+}
+
+.delete-btn:hover {
+  background-color: #83673c;
+}
+
 
 .menu-container {
   max-width: 800px;
-  margin: 5% auto;
+  margin: 0 auto;
   background-color: #fff;
   padding: 2rem;
   border: 1px solid #ccc;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-sizing: border-box;
 }
 
 .menu-header {
   text-align: center;
   border-bottom: 2px solid #b48b4e;
-  margin-bottom: 2rem;
+  margin-bottom: 20px;
 }
 
 .menu-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.2rem;
+  font-size: 40px;
+  /*margin-bottom: 2px;*/
 }
 
 .menu-section {
@@ -67,6 +84,8 @@ body {
   justify-content: space-between;
   border-bottom: 1px dashed #ccc;
   padding: 1rem 0;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .menu-item img {
@@ -75,10 +94,12 @@ body {
   object-fit: cover;
   border-radius: 8px;
   margin-left: 1rem;
+  flex-shrink: 0;
 }
 
 .menu-item-info {
   flex-grow: 1;
+  min-width: 200px;
 }
 
 .menu-item h3 {
@@ -94,4 +115,64 @@ body {
 .menu-item-price {
   font-weight: bold;
   color: #b48b4e;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.services {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.service-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  width: 250px;
+  text-align: center;
+}
+.service-card img {
+  width: 100%;
+  border-radius: 8px;
+  height: 150px;
+  object-fit: cover;
+}
+.service-card h3 {
+  margin-top: 15px;
+}
+.service-card p {
+  color: #666;
+}
+
+@media (max-width: 600px) {
+  .form-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-container input,
+  .add-btn,
+  .delete-btn {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  .menu-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .menu-item img {
+    margin-left: 0;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+  }
+
+  .menu-item-price {
+    margin-top: 0.5rem;
+  }
 }

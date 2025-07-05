@@ -11,7 +11,7 @@
       <li routerLink="/home">Home</li>
       <li *ngIf="role === 'ROLE_ADMIN' && service.isLoggedIn()" routerLink="/createRoom">Create Room</li>
       <li routerLink="/rooms">Rooms</li>
-      <li routerLink="/restaurant">Restaurant</li>
+      <li routerLink="/restaurant">Services</li>
       <li *ngIf="role === 'ROLE_ADMIN' && service.isLoggedIn()" routerLink="/maintenance">Maintenance</li>
       <li *ngIf="service.isLoggedIn()" routerLink="/reviews" >Leave a review</li>
     </ul>

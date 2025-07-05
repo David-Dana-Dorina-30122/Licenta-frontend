@@ -12,6 +12,7 @@ export class RestaurantComponent implements OnInit {
   items: RestaurantItemModel[] = [];
   newItem: RestaurantItemModel = new   RestaurantItemModel ();
   role: string | null = '';
+  selectedTab: 'menu' | 'services' = 'menu';
   constructor(private services: Services) {}
 
   ngOnInit(): void {

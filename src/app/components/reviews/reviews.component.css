@@ -1,16 +1,16 @@
-body{
+body {
   margin-top: 10%;
+  font-family: Arial, sans-serif;
 }
 
 .review-section {
   border: 1px solid #ccc;
   padding: 1.5rem;
   border-radius: 10px;
-  margin-top: 1rem;
+  margin: 1rem auto 2rem auto;
   background-color: #f9f9f9;
   max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  box-sizing: border-box;
 }
 
 .review-section h4,
@@ -52,6 +52,7 @@ body{
   border: 1px solid #ccc;
   border-radius: 6px;
   background-color: #fff;
+  box-sizing: border-box;
 }
 
 .review-form textarea {
@@ -68,14 +69,33 @@ body{
   font-size: 1rem;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, transform 0.2s;
 }
 
 .review-form button:hover:not(:disabled) {
   background-color: #0056b3;
+  transform: translateY(-2px);
 }
 
 .review-form button:disabled {
   background-color: #aaa;
   cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 650px) {
+  body {
+    margin-top: 5%;
+  }
+
+  .review-section {
+    padding: 1rem;
+    margin: 1rem 10px 2rem 10px;
+    max-width: 100%;
+  }
+
+  .review-form button {
+    width: 100%;
+    text-align: center;
+  }
 }

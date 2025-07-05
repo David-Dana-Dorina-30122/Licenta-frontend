@@ -70,10 +70,10 @@ export class MyAccountComponent {
     if (this.userForm.valid) {
       this.services.updateUser(this.userForm.value).subscribe(
         response => {
-          console.log("User updated:", response);
+          console.log("User actualizat:", response);
         },
         error => {
-          console.error("Error updating user:", error);
+          console.error("Eroare la actualizare:", error);
         }
       );
     }
@@ -82,7 +82,7 @@ export class MyAccountComponent {
   loadAddress() {
     this.services.getUserAddress().subscribe(
       (data) => {
-        console.log('Received address:', data);
+        console.log('Adresa primita:', data);
         if (data && Array.isArray(data) && data.length > 0) {
           this.address = data[0];
           this.hasAddress = true;
@@ -99,7 +99,6 @@ export class MyAccountComponent {
 
 
   addNewAddress(): void {
-    console.log("New address to add:", this.newAddress, typeof this.newAddress);
     this.services.addAddress(this.newAddress).subscribe(
       () => {
         this.loadAddress();
@@ -113,12 +112,12 @@ export class MyAccountComponent {
 
 
   updateAddress(): void {
-    console.log("Tip address:", typeof this.address); // trebuie să fie "object"
-    console.log("Este array?", Array.isArray(this.address)); // trebuie să fie false
+    console.log("Tip address:", typeof this.address);
+    console.log("Este array?", Array.isArray(this.address));
     console.log("Address to update:", this.address);
 
     if (Array.isArray(this.address)) {
-      console.error("Eroare: address este array. Se oprește update.");
+      console.error("Eroare: addresa este array. Se oprește update.");
       return;
     }
 
@@ -170,21 +169,11 @@ export class MyAccountComponent {
     );
   }
 
-
-  checkToken(){
-    if(!this.services.getToken()){
-      this.services.logout();
-      this.router.navigate(['/home']);
-    }
-  }
-
-
   getData() {
     const userData = this.services.getUserData();
     //console.log("date", userData);
     this.enabled = userData.enabled;
     console.log("enabled", this.enabled)
   }
-
 
 }

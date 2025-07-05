@@ -17,6 +17,7 @@ export class ReservationModel {
   user?: UserModel;
   meals?: boolean;
   spa?: boolean;
-  status!: ReservationStatus
+  status!: ReservationStatus;
+  createdAt!: string;
 }
 

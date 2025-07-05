@@ -1,21 +1,11 @@
-<!--<h2 class="title">Restaurant Menu</h2>-->
-
-
-
-<!--<div class="menu-container">-->
-<!--    <div class="menu-card" *ngFor="let item of items">-->
-<!--        <img [src]="item.photoURL" alt="{{ item.foodName }}">-->
-<!--        <div class="info">-->
-<!--            <h3>{{ item.foodName }}</h3>-->
-<!--            <p>{{ item.description }}</p>-->
-<!--            <button (click)="deleteItem(item.id!)">Șterge</button>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
-
 <body>
-<div class="menu-container">
+
+<div class="top-bar">
+  <button class="add-btn" (click)="selectedTab = 'menu'" [class.active]="selectedTab === 'menu'" > Menu</button>
+  <button class="add-btn" (click)="selectedTab = 'services'" [class.active]="selectedTab === 'services'" > Services</button>
+</div>
+
+<div *ngIf="selectedTab === 'menu'" class="menu-container">
   <div class="form-container"  *ngIf="role === 'ROLE_ADMIN'">
     <input [(ngModel)]="newItem.foodName" placeholder="Name" name="foodName">
     <input [(ngModel)]="newItem.photoURL" placeholder="URL image" name="photoURL">
@@ -38,7 +28,36 @@
       <img [src]="item.photoURL" alt="{{ item.foodName }}">
       <button  *ngIf="role === 'ROLE_ADMIN'" class="delete-btn" (click)="deleteItem(item.id!)">Delete</button>
     </div>
-
   </div>
 </div>
+
+<div *ngIf="selectedTab === 'services'" class="menu-container">
+  <div class="menu-header">
+    <h1>Our Services</h1>
+  </div>
+  <div class="services">
+    <div class="service-card">
+      <img src="https://q-xx.bstatic.com/xdata/images/hotel/max500/15521572.jpg?k=8cdf1751925f236ce80b62fca1070c74da1afa88284d0427c79c46b83de958d2&o=" alt="Spa & Wellness">
+      <h3>Spa & Wellness</h3>
+      <p>Relax and rejuvenate with our premium spa treatments and wellness programs.</p>
+    </div>
+    <div class="service-card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUVZe-0q7nICdeAuul6XLYuXnLZSEBV6e6SA&s" alt="Pool">
+      <h3>Pool</h3>
+      <p>Enjoy our indoor and outdoor pools, perfect for swimming and sunbathing.</p>
+    </div>
+    <div class="service-card">
+      <img src="https://www.hotel-adriatic.hr/datastore/imagestore/2000x1300/2000x1300_1598362108relax-zone-booking.jpg?v=1608397042" alt="Relax Area">
+      <h3>Relax Area</h3>
+      <p>Unwind in our quiet relaxation areas designed for your comfort and peace of mind.</p>
+    </div>
+    <div class="service-card">
+      <img src="https://d1qzuhxpc9cpmj.cloudfront.net/images/Gym20924a_copy.jpg" alt="Fitness & Gym">
+      <h3>Fitness & Gym</h3>
+      <p>Everyday movement is important. Give out gym a try.</p>
+    </div>
+  </div>
+
+</div>
+
 </body>

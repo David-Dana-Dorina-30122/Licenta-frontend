@@ -1,10 +1,9 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 import {Services} from '../../services/services';
 import {ReservationModel} from '../../models/reservation.model';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Room, RoomModel} from '../../models/room.model';
+import {HttpClient} from '@angular/common/http';
+import {RoomModel} from '../../models/room.model';
 import {Router} from '@angular/router';
-import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-reservation-list',
@@ -18,13 +17,17 @@ export class ReservationListComponent {
   isNotEmpty = false;
   showLoginPopup = false;
   qrCodes: { [id: number]: string } = {};
-  isActive = false;
-
+  timeExpired:boolean = false;
   constructor(private http: HttpClient, private service: Services, private router: Router) {}
 
   ngOnInit(): void {
     this.loadRooms();
     this.loadReservations();
+  }
+  canCancel(reservation: ReservationModel): boolean {
+    const createdAt = new Date(reservation.createdAt).getTime();
+    const now = Date.now();
+    return now < createdAt + 2* 60 * 1000;
   }
 
   get activeReservations(): ReservationModel[] {
@@ -37,13 +40,6 @@ export class ReservationListComponent {
 
   loadReservations() {
     const token = this.service.getToken();
-
-    if (!token) {
-      this.showLoginPopup = true;
-      // this.service.logout();
-      // this.router.navigate(['/home']);
-      return;
-    }
 
     if (token) {
       this.service.getUserReservations().subscribe(
@@ -61,24 +57,11 @@ export class ReservationListComponent {
         },
         (error) => {
           console.error('Eroare la obținerea rezervărilor:', error);
-          // this.service.logout();
-          // this.router.navigate(['/home']);
         }
       );
     } else {
       console.error('Token-ul nu este disponibil! Nu se pot obține rezervările.');
-      // this.service.logout();
-      // this.router.navigate(['/home']);
     }
-  }
-
-  getAllReservations():void{
-    this.service.getAllReservations().subscribe( (reservations: ReservationModel[]) => {
-          console.log('Rezervările utilizatorului:', reservations);
-        },
-        (error) => {
-          console.error('Eroare la obținerea rezervărilor:', error);
-        })
   }
 
   loadRooms(): void {
@@ -99,8 +82,6 @@ export class ReservationListComponent {
         } else {
           console.warn('Nu sunt camere disponibile.');
           this.rooms = []
-         // this.service.logout();
-          //this.router.navigate(['/home']);
         }
       },
       (error) => {
@@ -125,7 +106,7 @@ export class ReservationListComponent {
   }
 
   deleteReservation(id: number): void {
-    if (confirm('Sigur vrei să ștergi această cameră?')) {
+    if (confirm('Sigur vrei să ștergi această rezervare?')) {
       this.service.deleteReservation(id).subscribe(() => {
         this.reservations = this.reservations.filter(reservation => reservation.id !== id);
       });

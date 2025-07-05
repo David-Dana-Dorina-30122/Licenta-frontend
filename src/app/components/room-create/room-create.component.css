@@ -45,8 +45,15 @@ button:hover {
   background-color: #0056b3;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .room-form {
+    padding: 20px 25px;
+    margin-top: 50px;
+    width: 95%;
+  }
+}
+
+@media (max-width: 500px) {
   .room-form {
     padding: 15px 20px;
     margin-top: 40px;
@@ -55,6 +62,13 @@ button:hover {
 
   button {
     font-size: 1rem;
+    padding: 10px;
+  }
+
+  input[type="number"],
+  input[type="text"],
+  select {
+    font-size: 0.95rem;
     padding: 10px;
   }
 }

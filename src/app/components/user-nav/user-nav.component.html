@@ -7,7 +7,7 @@
       </svg>
     </div>
 
-    <ul [ngClass]="{ 'nav-list': true, 'show': isClicked }">
+    <ul *ngIf="isClicked" class="nav-list">
       <li routerLink="/home">Home</li>
       <li *ngIf="role === 'ROLE_ADMIN' && service.isLoggedIn()" routerLink="/createRoom">Create Room</li>
       <li routerLink="/rooms">Rooms</li>

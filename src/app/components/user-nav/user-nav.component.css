@@ -1,10 +1,7 @@
-body {
+body{
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  padding-top: 80px;
 }
-
 * {
   box-sizing: border-box;
 }
@@ -16,7 +13,7 @@ nav {
   width: 100%;
   z-index: 1000;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(255, 255, 255, 0.7);
   border-bottom: 2px solid rgba(128, 128, 128, 0.37);
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
@@ -27,7 +24,6 @@ nav {
 
 .menu-button {
   cursor: pointer;
-  display: none; /* ascuns pe desktop */
 }
 
 .nav-list {
@@ -45,7 +41,20 @@ nav {
   padding: 8px;
 }
 
-.nav-list li:hover {
+.left-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.right-group{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+}
+
+.nav-list li:hover{
   background-color: rgba(220, 217, 217, 0.68);
   border-radius: 5px;
 }
@@ -55,42 +64,62 @@ a {
   color: black;
 }
 
-.left-group {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-.right-group {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 18px;
+.nav-list li {
+  color: #454141;
+  cursor: pointer;
+  animation: slideInLeft 0.4s ease forwards;
+  opacity: 0;
 }
 
-.currency select, .login {
-  background-color: transparent;
+.nav-list li:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.nav-list li:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.nav-list li:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.nav-list li:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.nav-list li:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.nav-list li:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+.currency select,.login{
+  background-color: rgba(255, 255, 255, 0.0);
   padding: 10px;
   cursor: pointer;
   border: none;
 }
-
-.currency select:hover,
-.login:hover {
+.currency select:hover{
+  background: rgba(220, 217, 217, 0.68);
+  border-radius: 5px;
+}
+.login:hover{
   background: rgba(220, 217, 217, 0.68);
   border-radius: 5px;
 }
 
-/* --------- MOBILE ---------- */
 @media (max-width: 768px) {
   nav {
     flex-direction: column;
     align-items: flex-start;
-    padding: 15px;
-  }
-
-  .menu-button {
-    display: block; /* apare pe mobil */
   }
 
   .nav-list {
@@ -98,35 +127,11 @@ a {
     width: 100%;
     margin-top: 10px;
     gap: 10px;
-    align-items: flex-start;
-    display: none; /* ascuns by default */
   }
 
-  .nav-list.show {
-    display: flex; /* afișat când are clasa `show` */
-    background: white;
-    border-radius: 10px;
-    padding: 10px;
-  }
-
-  .left-group {
+  .login {
     width: 100%;
-    justify-content: space-between;
-  }
-
-  .right-group {
-    width: 100%;
-    justify-content: flex-end;
     margin-top: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .nav-list {
-    font-size: 18px;
-  }
-
-  .right-group {
-    font-size: 16px;
+    justify-content: flex-end;
   }
 }

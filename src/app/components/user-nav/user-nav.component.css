@@ -1,7 +1,8 @@
-body{
+body {
   margin: 0;
   padding: 0;
 }
+
 * {
   box-sizing: border-box;
 }
@@ -39,6 +40,18 @@ nav {
   color: #454141;
   cursor: pointer;
   padding: 8px;
+  animation: slideInLeft 0.4s ease forwards;
+  opacity: 0;
+}
+
+.nav-list li:hover {
+  background-color: rgba(220, 217, 217, 0.68);
+  border-radius: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }
 
 .left-group {
@@ -47,21 +60,11 @@ nav {
   gap: 20px;
 }
 
-.right-group{
+.right-group {
   display: flex;
   align-items: center;
   gap: 12px;
   font-size: 18px;
-}
-
-.nav-list li:hover{
-  background-color: rgba(220, 217, 217, 0.68);
-  border-radius: 5px;
-}
-
-a {
-  text-decoration: none;
-  color: black;
 }
 
 @keyframes slideInLeft {
@@ -73,13 +76,6 @@ a {
     transform: translateX(0);
     opacity: 1;
   }
-}
-
-.nav-list li {
-  color: #454141;
-  cursor: pointer;
-  animation: slideInLeft 0.4s ease forwards;
-  opacity: 0;
 }
 
 .nav-list li:nth-child(1) {
@@ -101,21 +97,21 @@ a {
   animation-delay: 0.6s;
 }
 
-.currency select,.login{
+.currency select,
+.login {
   background-color: rgba(255, 255, 255, 0.0);
   padding: 10px;
   cursor: pointer;
   border: none;
 }
-.currency select:hover{
-  background: rgba(220, 217, 217, 0.68);
-  border-radius: 5px;
-}
-.login:hover{
+
+.currency select:hover,
+.login:hover {
   background: rgba(220, 217, 217, 0.68);
   border-radius: 5px;
 }
 
+/* MOBILE ADAPTIVE */
 @media (max-width: 768px) {
   nav {
     flex-direction: column;
@@ -123,15 +119,43 @@ a {
   }
 
   .nav-list {
+    display: none; /* ASCUNS IMPLICIT pe mobil */
     flex-direction: column;
     width: 100%;
     margin-top: 10px;
     gap: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  .nav-list.show {
+    display: flex; /* ARATAT când isClicked = true */
+  }
+
+  .left-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .right-group {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 10px;
   }
 
   .login {
-    width: 100%;
-    margin-top: 10px;
-    justify-content: flex-end;
+    width: auto;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-list {
+    font-size: 18px;
+  }
+
+  .right-group {
+    font-size: 16px;
   }
 }

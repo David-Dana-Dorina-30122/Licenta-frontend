@@ -146,6 +146,10 @@ body {
     margin-top: 60px;
   }
 
+  .account-wrapper{
+    padding-top: 30px;
+  }
+
   .sidebar button {
     font-size: 13px;
     padding: 7px;

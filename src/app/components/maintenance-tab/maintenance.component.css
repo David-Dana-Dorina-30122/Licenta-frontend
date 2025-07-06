@@ -13,10 +13,14 @@ h2{
   margin: 1% 40%;
 }
 
-.section-title {
+.section-title,.section1-title {
   text-align: center;
   font-size: 24px;
   color: #2c3e50;
+}
+
+.section1-title{
+  padding-top: 40px;
 }
 
 .user-container {
@@ -98,3 +102,53 @@ h2{
   border-bottom: 1px solid #ddd;
 }
 
+@media (max-width: 972px) {
+  body {
+    margin-top: 20px;
+    padding: 0 10px;
+  }
+
+  h2 {
+    margin: 10px auto;
+    width: fit-content;
+  }
+
+  .section-title,.section1-title {
+    text-align: center;
+    font-size: 24px;
+    color: #2c3e50;
+  }
+  .user-container {
+    grid-template-columns: 1fr;
+  }
+
+  .section1-title{
+    padding-top: 80px;
+  }
+
+  .user-card {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .update-btn {
+    margin-left: 0;
+    align-self: flex-end;
+  }
+
+
+  .styled-table {
+    font-size: 12px;
+  }
+
+  .styled-table th,
+  .styled-table td {
+    padding: 8px;
+    white-space: nowrap;
+  }
+
+  .reservations-container {
+    padding: 10px;
+  }
+
+}

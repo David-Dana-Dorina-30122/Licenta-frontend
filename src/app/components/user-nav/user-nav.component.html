@@ -2,12 +2,12 @@
 <nav class="navbar">
   <div class="left-group">
     <div class="menu-button" (click)="onClick()">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+      <svg  xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
         <path fill="currentColor" d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
       </svg>
     </div>
 
-    <ul *ngIf="isClicked" class="nav-list">
+    <ul [ngClass]="{'nav-list': true, 'show': isClicked}" class="nav-list" (click)="onClick()">
       <li routerLink="/home">Home</li>
       <li *ngIf="role === 'ROLE_ADMIN' && service.isLoggedIn()" routerLink="/createRoom">Create Room</li>
       <li routerLink="/rooms">Rooms</li>

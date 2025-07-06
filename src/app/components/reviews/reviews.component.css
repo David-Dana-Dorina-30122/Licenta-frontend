@@ -85,13 +85,11 @@ body {
 /* Responsive */
 @media (max-width: 650px) {
   body {
-    margin-top: 5%;
+    margin-top: 20px;
   }
 
   .review-section {
-    padding: 1rem;
-    margin: 1rem 10px 2rem 10px;
-    max-width: 100%;
+  margin: 100px 0 20px 20px;
   }
 
   .review-form button {

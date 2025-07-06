@@ -57,7 +57,7 @@ body {
   background-color: rgba(0, 0, 0, 0.4);
   border: none;
   color: white;
-  font-size: 16px; /* mai mare pt claritate */
+  font-size: 16px;
   padding: 12px 18px;
   border-radius: 50%;
   cursor: pointer;
@@ -132,7 +132,7 @@ button:hover {
   padding-left: 0;
 }
 
-/* 🔹 MEDIA QUERIES: mobile/tablet */
+
 @media (max-width: 900px) {
   .slider-image {
     width: 100%;

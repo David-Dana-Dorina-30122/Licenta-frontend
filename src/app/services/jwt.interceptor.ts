@@ -24,9 +24,13 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
-          console.warn('Token expirat sau invalid. Redirectare la login...');
-         localStorage.removeItem('authToken');
-         window.location.href = '/home';
+          if (!request.url.includes('/auth/login')) {
+            console.log('Token expirat sau neautorizat, redirect la home.');
+            localStorage.removeItem('authToken');
+            window.location.href = '/home';
+          }
+         // localStorage.removeItem('authToken');
+         // window.location.href = '/home';
         }
         return throwError(() => error);
       })

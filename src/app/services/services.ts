@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {catchError, map, Observable, tap, throwError} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {map, Observable, tap} from 'rxjs';
 import { ReservationModel } from '../models/reservation.model';
 import {RoomModel} from '../models/room.model';
 import {jwtDecode} from 'jwt-decode';
 import {AddressModel} from '../models/address.model';
 import {UserModel} from '../models/user.model';
-import {RoleUpdateRequest} from '../models/roleUpdate';
 import {ReviewModel} from '../models/reviewModel';
 import {RestaurantItemModel} from "../models/restaurant.model";
 
@@ -14,11 +13,11 @@ import {RestaurantItemModel} from "../models/restaurant.model";
   providedIn: 'root',
 })
 export class Services {
-  private apiUrl = 'https://licenta-backend-production-d411.up.railway.app';
-  private apiUrl2 = 'https://licenta-backend-production-d411.up.railway.app/reservations';
+  // private apiUrl = 'https://licenta-backend-production-d411.up.railway.app';
+  // private apiUrl2 = 'https://licenta-backend-production-d411.up.railway.app/reservations';
 
-  // private apiUrl = 'http://localhost:8082';
-  // private apiUrl2 = 'http://localhost:8082/reservations';
+  private apiUrl = 'http://localhost:8082';
+  private apiUrl2 = 'http://localhost:8082/reservations';
 
   constructor(private http: HttpClient) {}
 
@@ -71,7 +70,7 @@ export class Services {
   resendCode(email: string): Observable<any> {
     return this.http.post(
       `${this.apiUrl}/auth/resend`,
-      { email }, // body conține cheia "email"
+      { email },
       { responseType: 'text' as 'json' }
     );
   }
@@ -100,10 +99,8 @@ export class Services {
   }
 
   deleteReservation(id: number): Observable<any> {
-
     const token = this.getToken()
     if (token) {
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
       return this.http.delete(`${this.apiUrl}/reservations/${id}`)
     }
     else throw new Error('Token-ul nu este disponibil!');
@@ -142,7 +139,11 @@ export class Services {
     );
   }
 
-
+ getReservationById(id: number):Observable<ReservationModel>{
+   const token = this.getToken();
+   const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+   return this.http.get<ReservationModel>(`${this.apiUrl}/reservations/${id}`,{headers})
+ }
 
 
   // ROOM
@@ -164,16 +165,7 @@ export class Services {
   deleteRoom(id: number):Observable<any>{
     const token = this.getToken()
     if (token) {
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
       return this.http.delete(`${this.apiUrl}/rooms/${id}`)
-    }
-    else throw new Error('Token-ul nu este disponibil!');
-  }
-  getAvailability():Observable<any>{
-    const token = this.getToken()
-    if (token) {
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-      return this.http.delete(`${this.apiUrl}/rooms/available`)
     }
     else throw new Error('Token-ul nu este disponibil!');
   }
@@ -185,6 +177,11 @@ export class Services {
   getRoomById(id : number):Observable<any>{
     return this.http.get<any>(`${this.apiUrl}/rooms/${id}`);
   }
+
+  getAvailableRooms(params: any): Observable<RoomModel[]> {
+    return this.http.get<RoomModel[]>(`${this.apiUrl}/available`, { params });
+  }
+
 
 // USER
   getCurrentUser(): Observable<any>{
@@ -268,22 +265,16 @@ export class Services {
     );
   }
 
-  getReviewsByReservation(reservationId: number): Observable<ReviewModel[]> {
-    const token = this.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<ReviewModel[]>(`http://localhost:8082/reviews/by-reservation/${reservationId}`, {headers});
-  }
-
   addReview(review: ReviewModel): Observable<ReviewModel> {
     const token = this.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post<ReviewModel>(`http://localhost:8082/reviews`, review, {headers});
+    return this.http.post<ReviewModel>(`${this.apiUrl}/reviews`, review, {headers});
   }
 
-  getMyRooms(): Observable<RoomModel[]> {
+  getAllReviews():Observable<ReviewModel[]>{
     const token = this.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<RoomModel[]>('http://localhost:8082/reviews/my-rooms',{headers});
+    return this.http.get<ReviewModel[]>(`${this.apiUrl}/reviews/getAll`, {headers});
   }
 
   getAllItems(): Observable<RestaurantItemModel[]> {

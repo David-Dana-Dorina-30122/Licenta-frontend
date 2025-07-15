@@ -13,11 +13,11 @@ import {RestaurantItemModel} from "../models/restaurant.model";
   providedIn: 'root',
 })
 export class Services {
-  // private apiUrl = 'https://licenta-backend-production-d411.up.railway.app';
-  // private apiUrl2 = 'https://licenta-backend-production-d411.up.railway.app/reservations';
+  private apiUrl = 'https://licenta-backend-production-d411.up.railway.app';
+  private apiUrl2 = 'https://licenta-backend-production-d411.up.railway.app/reservations';
 
-  private apiUrl = 'http://localhost:8082';
-  private apiUrl2 = 'http://localhost:8082/reservations';
+  // private apiUrl = 'http://localhost:8082';
+  // private apiUrl2 = 'http://localhost:8082/reservations';
 
   constructor(private http: HttpClient) {}
 

@@ -1,5 +1,5 @@
 import { ReservationStatus } from './reservationStatus.model';
-import {Room, RoomModel} from './room.model';
+import {RoomModel} from './room.model';
 import {UserModel} from "./user.model";
 
 export class ReservationModel {
@@ -17,7 +17,7 @@ export class ReservationModel {
   user?: UserModel;
   meals?: boolean;
   spa?: boolean;
-  status!: ReservationStatus;
+  status?: ReservationStatus;
   createdAt!: string;
 }
 

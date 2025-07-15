@@ -33,14 +33,14 @@ export class ResetPasswordComponent {
         newPassword: this.form.value.password
       };
 
-      this.service.resetPassword(payload).subscribe(
-        () => {
+      this.service.resetPassword(payload).subscribe({
+        next:() => {
           alert('Parola a fost schimbată cu succes.');
           this.router.navigate(['/login']);
         },
-        err => {
-          console.error('Eroare la resetare:', err);
-        }
+        error:error => {
+          console.error('Eroare la resetare:', error);
+        }}
       );
     }
   }

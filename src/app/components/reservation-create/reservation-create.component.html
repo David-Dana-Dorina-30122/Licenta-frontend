@@ -1,9 +1,7 @@
 <body>
 <div class="main-container">
-  <!-- LEFT: reservation -->
   <div class="reservation-container">
     <h2>Confirm Reservation</h2>
-<!--    <p><strong>Room: </strong> {{reservation.roomId}}</p>-->
     <p><strong>Check-in:</strong> {{ reservation.dataCheckIn }}</p>
     <p><strong>Check-out:</strong> {{ reservation.dataCheckOut }}</p>
     <p><strong>Number Of People:</strong> {{ reservation.numberOfPeople }}</p>
@@ -77,8 +75,6 @@
     </div>
   </div>
 
-
-  <!-- RIGHT: services -->
   <div class="services-panel">
     <div class="service-card">
       <img src="https://www.mashed.com/img/gallery/the-truth-about-hotel-breakfast-buffets/l-intro-1609346085.jpg" alt="breakfast">
@@ -98,7 +94,6 @@
   </div>
 </div>
 
-<!-- Login modal -->
 <div *ngIf="showLoginPopup" class="modal-backdrop">
   <div class="modal-content">
     <h2>Authentication needed!</h2>

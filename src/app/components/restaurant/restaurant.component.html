@@ -6,7 +6,7 @@
 </div>
 
 <div *ngIf="selectedTab === 'menu'" class="menu-container">
-  <div class="form-container"  *ngIf="role === 'ROLE_ADMIN'">
+  <div class="form-container"  *ngIf="role === 'ROLE_ADMIN' || role === 'ROLE_STAFF'">
     <input [(ngModel)]="newItem.foodName" placeholder="Name" name="foodName">
     <input [(ngModel)]="newItem.photoURL" placeholder="URL image" name="photoURL">
     <input [(ngModel)]="newItem.description" placeholder="Description" name="description">
@@ -23,7 +23,7 @@
       <div class="menu-item-info">
         <h3>{{item.foodName}}</h3>
         <p>{{item.description}}</p>
-        <div class="menu-item-price">${{ item.price }}</div>
+        <div class="menu-item-price">{{ getConvertedPrice(item.price) | currency:getCurrency()}}</div>
       </div>
       <img [src]="item.photoURL" alt="{{ item.foodName }}">
       <button  *ngIf="role === 'ROLE_ADMIN'" class="delete-btn" (click)="deleteItem(item.id!)">Delete</button>
@@ -57,7 +57,5 @@
       <p>Everyday movement is important. Give out gym a try.</p>
     </div>
   </div>
-
 </div>
-
 </body>

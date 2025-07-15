@@ -1,11 +1,9 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 import {Services} from '../../services/services';
 import {Router} from '@angular/router';
-import {Address} from 'node:cluster';
 import {AddressModel} from '../../models/address.model';
 import {UserModel} from '../../models/user.model';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-my-account',
@@ -33,8 +31,6 @@ export class MyAccountComponent {
 
   ngOnInit() {
     this.getData();
-
-    // this.checkToken();
     this.loadAddress();
     this.getCurrentUser();
 
@@ -45,7 +41,6 @@ export class MyAccountComponent {
       phone: [''],
       password: [''],
       verificationCode:['']
-     // enabled:['']
     });
 
     this.services.getCurrentUser().subscribe(user => {
@@ -68,20 +63,20 @@ export class MyAccountComponent {
 
   updateUser(): void {
     if (this.userForm.valid) {
-      this.services.updateUser(this.userForm.value).subscribe(
-        response => {
+      this.services.updateUser(this.userForm.value).subscribe({
+        next:(response) => {
           console.log("User actualizat:", response);
         },
-        error => {
+        error:error => {
           console.error("Eroare la actualizare:", error);
         }
-      );
+      });
     }
   }
 
   loadAddress() {
-    this.services.getUserAddress().subscribe(
-      (data) => {
+    this.services.getUserAddress().subscribe({
+     next: (data) => {
         console.log('Adresa primita:', data);
         if (data && Array.isArray(data) && data.length > 0) {
           this.address = data[0];
@@ -90,30 +85,27 @@ export class MyAccountComponent {
           this.hasAddress = false;
         }
       },
-      (error) => {
+      error :error => {
         console.error('Eroare la încărcarea adresei:', error);
         this.hasAddress = false;
       }
-    );
+    });
   }
 
-
   addNewAddress(): void {
-    this.services.addAddress(this.newAddress).subscribe(
-      () => {
+    this.services.addAddress(this.newAddress).subscribe({
+      next: () => {
         this.loadAddress();
         this.newAddress = { id: 0, street: '', city: '', country: '' };
       },
-      error => {
+      error: error => {
         console.error("Eroare la adăugarea adresei:", error);
       }
-    );
+    });
   }
 
 
   updateAddress(): void {
-    console.log("Tip address:", typeof this.address);
-    console.log("Este array?", Array.isArray(this.address));
     console.log("Address to update:", this.address);
 
     if (Array.isArray(this.address)) {
@@ -141,14 +133,14 @@ export class MyAccountComponent {
       return;
     }
 
-    this.services.verifyCode(email, code).subscribe(
-      (response) => {
+    this.services.verifyCode(email, code).subscribe({
+      next:(response) => {
         console.log('Cont verificat:', response);
         window.location.reload();
       },
-      (error) => {
+      error:error => {
         console.error("Eroare la verificare:", error);
-      }
+      }}
     );
   }
 
@@ -159,13 +151,13 @@ export class MyAccountComponent {
       return;
     }
 
-    this.services.resendCode(email).subscribe(
-      (response) => {
+    this.services.resendCode(email).subscribe({
+      next:(response) => {
         console.log('Cod retrimis', response);
       },
-      (error) => {
+      error:error => {
         console.error("Eroare la retrimitere cod:", error);
-      }
+      }}
     );
   }
 

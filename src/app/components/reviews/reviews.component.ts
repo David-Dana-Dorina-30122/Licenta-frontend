@@ -1,7 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ReviewModel} from '../../models/reviewModel';
 import {Services} from '../../services/services';
-import {RoomModel} from '../../models/room.model';
 import {ReservationModel} from '../../models/reservation.model';
 
 @Component({
@@ -11,28 +10,36 @@ import {ReservationModel} from '../../models/reservation.model';
   styleUrl: './reviews.component.css'
 })
 export class ReviewsComponent implements OnInit {
-  @Input() reservationId!: number;
 
   reviews: ReviewModel[] = [];
   newReview: ReviewModel = { reservationId: 0, rating: 5, comment: '' };
   selectedReservationId: number | null = null;
   reservations: ReservationModel[] = [];
+  role: string | null = '';
+  reservation: ReservationModel | undefined ;
+  reviewsWithReservations: ReviewModel[] = [];
+  // reservationId: number = 0;
+  reservationsMap = new Map<number, ReservationModel>();
+
 
   constructor(private service: Services) {}
 
   ngOnInit(): void {
     this.loadReservations();
+    this.getReviews();
+    this.role = this.service.getRole();
+
   }
 
   loadReservations() {
-      this.service.getUserReservations().subscribe(
-        (reservations: ReservationModel[]) => {
+      this.service.getUserReservations().subscribe({
+        next:(reservations: ReservationModel[]) => {
           console.log('Rezervările utilizatorului:', reservations);
           this.reservations = reservations;
         },
-        (error) => {
+        error:error => {
           console.error('Eroare la obținerea rezervărilor:', error);
-        }
+        }}
       );
   }
 
@@ -50,4 +57,34 @@ export class ReviewsComponent implements OnInit {
       error: (err) => console.error('Eroare la trimiterea review-ului:', err)
     });
   }
+
+  getReviews(){
+    this.service.getAllReviews().subscribe({
+      next:(data) =>{
+        this.reviews = data;
+        console.log("Reviews primite",data)
+        this.reviews.forEach(review => {
+          console.log("reservationId:", review.reservationId);
+          this.getReservationById(review.reservationId);
+        });
+      },
+      error:error =>{
+        console.log("Eroare la obținerea review-uriloe: ", error)
+      }
+    })
+  }
+
+  getReservationById(id: number) {
+    this.service.getReservationById(id).subscribe({
+      next: (data:ReservationModel) => {
+
+        this.reservationsMap.set(id, data);
+        console.log("Rezervarea: ", this.reservationsMap);
+      },
+      error: error => {
+        console.log("Eroare la obținerea rezervarii: ", error);
+      }
+    });
+  }
+
 }

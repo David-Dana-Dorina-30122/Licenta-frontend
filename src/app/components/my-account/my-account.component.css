@@ -73,7 +73,7 @@ body {
 }
 
 .form-button:hover {
-  background-color: #0056b3;
+  background-color: #222c34;
 }
 
 .flex-column {
@@ -109,6 +109,14 @@ body {
 
 .logout-button:hover {
   background-color: #a12531;
+}
+
+.sendCode{
+  margin: 5px 0;
+}
+
+.sendCode:hover,.verifyCode:hover{
+  background-color: #222c34;
 }
 
 
@@ -156,6 +164,6 @@ body {
   }
 
   .panel-title {
-    font-size: 1.2rem;
+    font-size: 24px;
   }
 }

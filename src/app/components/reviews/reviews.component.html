@@ -22,4 +22,29 @@
     <button (click)="submitReview()" [disabled]="!selectedReservationId || !newReview.comment.trim()">Send</button>
   </div>
 </div>
+
+<div class="container" *ngIf="role === 'ROLE_ADMIN'">
+  <h1>All Reviews</h1>
+
+  <div *ngFor="let r of reviews" class="review-card">
+    <div >
+    <div class="review-rating">
+      Rating: {{ r.rating }}/5
+    </div>
+    <div class="review-comment">
+      {{ r.comment }}
+    </div>
+    <div class="review-date">
+      Posted on: {{ r.createdAt | date:'yyyy-MM-dd HH:mm' }}
+    </div>
+    <div>
+      From user: {{ reservationsMap.get(r.reservationId)?.user?.email }}
+    </div>
+      <div>
+        On reservation: {{ reservationsMap.get(r.reservationId)?.id }}
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>

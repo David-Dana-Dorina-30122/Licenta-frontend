@@ -2,9 +2,10 @@ import {Component, ElementRef, HostListener, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {Room, RoomModel} from '../../models/room.model';
-import {dateNotBeforeTodayValidator, dateRangeValidator} from '../../services/date-range.validator';
+import {RoomModel} from '../../models/room.model';
+import {dateRangeValidator} from '../../services/date-range.validator';
 import {CurrencyService} from '../../services/currency.service';
+import {Services} from '../../services/services';
 
 
 @Component({
@@ -21,12 +22,12 @@ export class AvailabilityComponent {
   errorMessage = '';
   submitted = false;
   today = '';
-  roomTypes: string [] = ['SINGLE', 'DOUBLE', 'DELUXE','PENTHOUSE'];
   showPopUp = false;
   numberOfAdults = 1;
   numberOfChildren = 0;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private currencyService: CurrencyService) {
+  constructor(private fb: FormBuilder, private services: Services, private router: Router, private currencyService: CurrencyService,
+              private http : HttpClient) {
     this.availabilityForm = this.fb.group({
       checkIn: ['', Validators.required],
       checkOut: ['', Validators.required],
@@ -65,7 +66,6 @@ export class AvailabilityComponent {
       .set('numberOfAdults', numberOfAdults)
       .set('numberOfChildren', numberOfChildren)
       .set('numberOfPeople', numberOfPeople)
-      // .set('type',type);
     console.log("parametrii: ", params)
     this.loading = true;
     this.errorMessage = '';
@@ -75,7 +75,9 @@ export class AvailabilityComponent {
       return;
     }
 
-    this.http.get<RoomModel[]>('https://licenta-backend-production-d411.up.railway.app/rooms/available', {params}).subscribe({
+    // this.http.get<RoomModel[]>('https://licenta-backend-production-d411.up.railway.app/rooms/available', {params}).subscribe({
+    this.http.get<RoomModel[]>('http://localhost:8082/rooms/available', {params}).subscribe({
+    //   this.services.getAvailableRooms(params).subscribe({
       next: (data) => {
         this.rooms = data;
         this.loading = false;
@@ -99,7 +101,6 @@ export class AvailabilityComponent {
         numberOfAdults:numberOfAdults,
         numberOfChildren:numberOfChildren,
         numberOfPeople:numberOfPeople,
-        // type: type,
         pricePerNight: room.pricePerNight
       }
     });
@@ -107,9 +108,6 @@ export class AvailabilityComponent {
 
   showPopup(){
     this.showPopUp = true
-  }
-  closePopup() {
-    this.showPopUp = false;
   }
 
   increase(type: 'adults' | 'children') {

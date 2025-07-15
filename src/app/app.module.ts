@@ -1,4 +1,4 @@
-import {importProvidersFrom, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptorsFromDi} from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -21,7 +21,6 @@ import {AuthInterceptor} from './services/jwt.interceptor';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { RoomDetailsComponent } from './components/room-details/room-details.component';
 import {LightboxModule} from 'ngx-lightbox';
-import SwiperCore from 'swiper';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { RestaurantComponent } from './components/restaurant/restaurant.component';
 

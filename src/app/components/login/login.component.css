@@ -95,7 +95,10 @@ html, body {
   color: #000;
 }
 
-/* ==== Responsive ==== */
+.error {
+  margin-top: 10px;
+}
+
 
 @media (max-width: 480px) {
   .auth-container {

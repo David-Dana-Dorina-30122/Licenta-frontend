@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {Services} from '../../services/services';
 import {ReservationModel} from '../../models/reservation.model';
-import {HttpClient} from '@angular/common/http';
 import {RoomModel} from '../../models/room.model';
 import {Router} from '@angular/router';
 
@@ -17,8 +16,7 @@ export class ReservationListComponent {
   isNotEmpty = false;
   showLoginPopup = false;
   qrCodes: { [id: number]: string } = {};
-  timeExpired:boolean = false;
-  constructor(private http: HttpClient, private service: Services, private router: Router) {}
+  constructor(private service: Services, private router: Router) {}
 
   ngOnInit(): void {
     this.loadRooms();
@@ -42,8 +40,8 @@ export class ReservationListComponent {
     const token = this.service.getToken();
 
     if (token) {
-      this.service.getUserReservations().subscribe(
-        (reservations: ReservationModel[]) => {
+      this.service.getUserReservations().subscribe({
+        next:(reservations: ReservationModel[]) => {
           console.log('Rezervările utilizatorului:', reservations);
           this.reservations = reservations;
           if(this.reservations.length > 0){
@@ -55,18 +53,19 @@ export class ReservationListComponent {
             });
           }
         },
-        (error) => {
+        error: error => {
           console.error('Eroare la obținerea rezervărilor:', error);
-        }
+        }}
       );
     } else {
       console.error('Token-ul nu este disponibil! Nu se pot obține rezervările.');
+      this.showLoginPopup = true;
     }
   }
 
   loadRooms(): void {
-    this.service.getRooms().subscribe(
-      (rooms: RoomModel[]) => {
+    this.service.getRooms().subscribe({
+      next:(rooms: RoomModel[]) => {
         if (rooms && rooms.length > 0) {
           this.rooms = rooms.map(room => ({
             id: room.id,
@@ -84,9 +83,9 @@ export class ReservationListComponent {
           this.rooms = []
         }
       },
-      (error) => {
+      error:error => {
         console.error('Eroare la încărcarea camerelor:', error);
-      }
+      }}
     );
   }
 

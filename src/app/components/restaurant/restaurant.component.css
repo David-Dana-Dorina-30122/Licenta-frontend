@@ -1,9 +1,8 @@
 
 body {
   font-family: 'Georgia', serif;
-  background-color: #f8f1e4;
+  background-color: #ffffff;
   margin: 0;
-  /*padding: 24px;*/
   color: #333;
   min-height: 100vh;
 }
@@ -21,14 +20,12 @@ body {
   gap: 10px;
   justify-content: center;
   margin-bottom: 30px;
-  /*flex-wrap: wrap;*/
 }
 
 .form-container input {
   padding: 8px;
   border-radius: 6px;
   border: 1px solid #ccc;
-  /*flex: 1 1 10px;*/
   min-width: 150px;
   box-sizing: border-box;
 }
@@ -72,7 +69,6 @@ body {
 
 .menu-header h1 {
   font-size: 40px;
-  /*margin-bottom: 2px;*/
 }
 
 .menu-section {
@@ -159,7 +155,6 @@ body {
   .form-container input,
   .add-btn,
   .delete-btn {
-    /*width: 100%;*/
     margin: 5px 0;
   }
 
@@ -168,7 +163,6 @@ body {
     border-radius: 6px;
     border: 1px solid #ccc;
     flex: 1 1 40px;
-    /*min-width: 150px;*/
     box-sizing: border-box;
   }
 

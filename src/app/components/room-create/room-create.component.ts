@@ -33,17 +33,6 @@ export class RoomCreateComponent {
     });
   }
 
-  addImage():void{
-    this.service.addImages(this.room.id, this.room.imageUrls).subscribe({
-      next: (r) => {
-        console.log("Imagine adaugata", r);
-        // window.location.reload();
-      },
-      error: (err) => {
-        console.error('Eroare la creare cameră:', err);
-      }
-    })
-  }
   addImageUrl(): void {
     if (this.newImageUrl.trim()) {
       const urls = this.newImageUrl.split(',').map(u => u.trim()).filter(u => u);

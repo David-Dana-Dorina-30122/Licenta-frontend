@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Services } from '../../services/services';
-import {response} from 'express';
 
 @Component({
   selector: 'app-login',
@@ -23,14 +22,9 @@ export class LoginComponent {
 
   constructor(private authService: Services, private router: Router) {}
 
-  reload(){
-    window.location.reload();
-  }
-
   toggleForm() {
     this.isLogin = !this.isLogin;
   }
-
 
   private storeToken(token: string) {
     if (typeof window !== 'undefined') {
@@ -46,75 +40,77 @@ export class LoginComponent {
   }
 
   private login() {
-    this.authService.login(this.email, this.password).subscribe(
-      (response) => {
-        console.log('User logged in', response);
-        this.storeToken(response.token); // Salvează token-ul
-        console.log('Token saved to localStorage:', localStorage.getItem('authToken'));
+    this.authService.login(this.email, this.password).subscribe({
+      next:(response) => {
+        console.log('User autentificat', response);
+        this.storeToken(response.token);
         this.router.navigate(['/home']);
+        this.errorMessage = '';
       },
-      (error) => {
-        console.error('Error during login', error);
-        this.errorMessage = 'Login failed. Please check your credentials.';
-      }
+      error: error => {
+        console.error('Eroare la autentificare', error);
+
+        if (error.status === 401) {
+          this.errorMessage = 'Email sau parolă incorectă.';
+        } else {
+          this.errorMessage = 'A apărut o eroare neașteptată. Încearcă din nou.';
+        }
+      }}
     );
   }
 
+
   private register() {
     localStorage.removeItem('authToken');
-    this.authService.register(this.email, this.password, this.firstName, this.lastName, this.phone).subscribe(
-      (response) => {
-        console.log('User registered', response);
+    this.authService.register(this.email, this.password, this.firstName, this.lastName, this.phone).subscribe({
+      next:(response) => {
+        console.log('User înregistrat', response);
         this.isVerificationStep = true;
       },
-      (error) => {
-        console.error('Error during registration', error);
-        this.errorMessage = 'Registration failed. Please try again later.';
-        //alert("Email invalid")
-      }
+      error:error => {
+        console.error('Eroare la înregistrare', error);
+        this.errorMessage = 'Registrare eșuată';
+      }}
     );
   }
 
   verifyCode() {
     console.log('Trimitem codul spre backend:', this.email, this.verificationCode);
 
-    this.authService.verifyCode(this.email, this.verificationCode).subscribe(
-      (response) => {
-        console.log('Code verificat', response);
+    this.authService.verifyCode(this.email, this.verificationCode).subscribe({
+     next:(response) => {
+        console.log('Cod verificat', response);
         window.location.reload();
       },
-      (error) => {
-        console.error("error");
-        this.errorMessage = 'Codul este incorect sau a expirat.';
-      }
+      error:error => {
+        console.error("error: ",error);
+        this.errorMessage = 'Cod incorect sau expirat.';
+      }}
     );
   }
 
   resendCode(){
-    this.authService.resendCode(this.email).subscribe(
-      (response) => {
+    this.authService.resendCode(this.email).subscribe({
+      next:(response) => {
         console.log('Cod retrimis', response);
       },
-      (error) => {
+      error:error => {
         console.error("error", error);
-        this.errorMessage = 'Codul nu a putut fi retrimit.';
-      }
+        this.errorMessage = 'Codul nu a putut fi retrimis.';
+      }}
     );
   }
 
   forgotPassword() {
-      this.authService.forgotPassword(this.email).subscribe(
-        res => {
-          alert('Email trimis cu instrucțiuni pentru resetare parolă.');
+      this.authService.forgotPassword(this.email).subscribe({
+      next:() => {
+          alert('Email trimis cu instrucțiuni pentru resetare parolă.',);
           this.router.navigate(['/login']);
         },
-        err => {
+        error:err => {
           console.error('Eroare:', err);
-        }
+        }}
       );
-
   }
-
-
 
 }

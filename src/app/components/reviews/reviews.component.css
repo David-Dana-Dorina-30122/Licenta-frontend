@@ -62,7 +62,7 @@ body {
 
 .review-form button {
   align-self: flex-start;
-  background-color: #007bff;
+  background-color: #5c5f62;
   color: white;
   border: none;
   padding: 0.6rem 1.2rem;
@@ -82,7 +82,36 @@ body {
   cursor: not-allowed;
 }
 
-/* Responsive */
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+}
+
+.review-card {
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.review-rating {
+  font-weight: bold;
+  color: #f39c12;
+}
+
+.review-comment {
+  margin: 10px 0;
+}
+
+.review-date {
+  color: #777;
+  font-size: 0.9em;
+}
+
+
+
 @media (max-width: 650px) {
   body {
     margin-top: 20px;

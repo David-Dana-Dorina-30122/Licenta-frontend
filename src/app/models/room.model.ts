@@ -9,12 +9,3 @@ export class RoomModel {
   imageUrls!: string[];
   services!: string[];
 }
-
-
-export interface Room{
-  id: number;
-  name: string;
-  description: string;
-  capacity: number;
-  pricePerNight: number;
-}

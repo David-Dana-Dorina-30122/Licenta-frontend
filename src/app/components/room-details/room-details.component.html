@@ -1,9 +1,9 @@
 <body>
 
 <div *ngIf="room" class="room-details">
-  <p>Camera: {{ room.type }}</p>
+  <p>Room Type: {{ room.type }}</p>
   <p>Details: {{ room.description }}</p>
-  <p>Price per night: {{ room.pricePerNight }} RON</p>
+<!--  <p>Price per night: {{ room.pricePerNight }} RON</p>-->
 
   <hr style="border: none; border-top: 2px solid #ccc; width: 100%; margin: 20px auto;">
   <div class="photos-container">
@@ -64,8 +64,6 @@
     <li><svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 512 512"><path fill="currentColor" d="M96 304c0 8.8 7.2 16 16 16h117.5l-96-96H112c-8.8 0-16 7.2-16 16v64zM256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zm0 448c-105.9 0-192-86.1-192-192c0-41.4 13.3-79.7 35.7-111.1l267.4 267.4C335.7 434.7 297.4 448 256 448zm45.2-192H384v32h-50.8l-32-32zm111.1 111.1L365.2 320H400c8.8 0 16-7.2 16-16v-64c0-8.8-7.2-16-16-16H269.2L144.9 99.7C176.3 77.3 214.6 64 256 64c105.9 0 192 86.1 192 192c0 41.4-13.3 79.7-35.7 111.1zM320.6 128c-15.6 0-28.6-11.2-31.4-25.9c-.7-3.6-4-6.1-7.7-6.1h-16.2c-5 0-8.7 4.5-8 9.4c4.6 30.9 31.2 54.6 63.3 54.6c15.6 0 28.6 11.2 31.4 25.9c.7 3.6 4 6.1 7.7 6.1h16.2c5 0 8.7-4.5 8-9.4c-4.6-30.9-31.2-54.6-63.3-54.6z"/></svg> Smoking not allowed</li>
     <li><svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" d="M14.5 24v-4a2.5 2.5 0 0 0-2.5-2.5h-.5V24m9-4v-1.5A2.5 2.5 0 0 0 18 16h-.5v4v-9.5H17a2.5 2.5 0 0 0-2.5 2.5v8m9 3v-4a2.5 2.5 0 0 0-2.5-2.5h-.708M.5 24v-2.5a4 4 0 0 1 4-4h4v-7h3v-.25l-.063-.1A19.008 19.008 0 0 1 8.5 0"/></svg> Quiet hours: 22:00 - 8:00</li>
     <li></li>
-    <li></li>
-    <li></li>
   </ul>
 
   <button (click)="showPopup()">Parking Info</button>
@@ -77,8 +75,8 @@
     <li>Near the property</li>
     <li>200 parking spaces</li>
     <li>10 &euro;/day fee</li>
-    <li>Monthly parking</li>
-    <li>Weekly parking</li>
+    <li>Monthly parking subscription</li>
+    <li>Weekly parking subscription</li>
     </ul>
     <div class="modal-buttons">
       <button (click)="closePopup()">Close</button>

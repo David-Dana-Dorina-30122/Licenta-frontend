@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Services} from '../../services/services';
 import {ActivatedRoute} from '@angular/router';
 import {RoomModel} from '../../models/room.model';
-import {Lightbox} from 'ngx-lightbox';
 import { Navigation, Pagination } from 'swiper/modules';
 import SwiperCore from 'swiper';
 
@@ -22,7 +21,6 @@ export class RoomDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private service: Services,
-    private  lightbox: Lightbox
   ) {}
 
   ngOnInit(): void {

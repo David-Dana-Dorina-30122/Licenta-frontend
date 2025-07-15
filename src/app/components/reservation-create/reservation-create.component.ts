@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ReservationModel} from '../../models/reservation.model';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {jwtDecode} from 'jwt-decode';
 import {Services} from '../../services/services';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ReservationStatus} from '../../models/reservationStatus.model';
 import {CurrencyService} from '../../services/currency.service';
 
 @Component({
@@ -67,9 +63,6 @@ export class ReservationCreateComponent {
       alert("Completează toate câmpurile!");
     }
   }
-
-
-
 
   ngOnInit(): void {
     this.reservation.meals = false;

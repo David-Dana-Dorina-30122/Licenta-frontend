@@ -10,6 +10,10 @@
       <input type="text" [(ngModel)]="email" placeholder="Email" />
       <input type="password" [(ngModel)]="password" placeholder="Password" />
       <button (click)="submit()">Login</button>
+      <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+      </div>
+
       <p class="switch-link">
         No Account? <a href="javascript:void(0)" (click)="toggleForm()">Register Here!</a>
       </p>
@@ -41,6 +45,9 @@
         />
         <button (click)="verifyCode()">Verify Code!</button>
         <button (click)="resendCode()">Resend Code!</button>
+        <div *ngIf="errorMessage" class="error">
+          {{ errorMessage }}
+        </div>
       </div>
     </div>
   </div>

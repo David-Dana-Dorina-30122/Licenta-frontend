@@ -3,5 +3,4 @@ export class AddressModel {
   street!: string;
   city!: string;
   country!: string;
-  // userId!: number;
 }

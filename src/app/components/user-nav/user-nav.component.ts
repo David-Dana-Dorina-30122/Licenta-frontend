@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {Services} from '../../services/services';
 import {CurrencyService} from '../../services/currency.service';
 
@@ -12,9 +12,7 @@ export class UserNavComponent  {
   role: string | null = '';
   isClicked = false;
 
-  currencies = ['RON', 'EUR', 'USD', 'GBP'];
   currentCurrency = 'RON';
-
 
   constructor(private currencyService: CurrencyService, public service: Services) {}
 
@@ -23,8 +21,6 @@ export class UserNavComponent  {
     const currency = selectElement.value;
     this.currencyService.setCurrency(currency);
   }
-
-
 
   ngOnInit(): void {
    this.role = this.service.getRole();
@@ -35,5 +31,4 @@ export class UserNavComponent  {
     this.isClicked = !this.isClicked;
   }
 
-  protected readonly HTMLSelectElement = HTMLSelectElement;
 }
